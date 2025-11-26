@@ -1,0 +1,23 @@
+<svg width="560" height="560" viewBox="0 0 560 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="560" height="560" rx="48" fill="#050505"/>
+  <g opacity="0.9">
+    <rect x="120" y="120" width="80" height="80" fill="#0E6E55"/>
+    <rect x="200" y="120" width="80" height="80" fill="#0A4434"/>
+    <rect x="280" y="120" width="80" height="80" fill="#0E6E55"/>
+    <rect x="360" y="120" width="80" height="80" fill="#0A4434"/>
+    <rect x="120" y="200" width="80" height="80" fill="#0A4434"/>
+    <rect x="200" y="200" width="80" height="80" fill="#0C8B66"/>
+    <rect x="280" y="200" width="80" height="80" fill="#0A4434"/>
+    <rect x="360" y="200" width="80" height="80" fill="#0C8B66"/>
+    <rect x="120" y="280" width="80" height="80" fill="#0C8B66"/>
+    <rect x="200" y="280" width="80" height="80" fill="#0E6E55"/>
+    <rect x="280" y="280" width="80" height="80" fill="#0A4434"/>
+    <rect x="360" y="280" width="80" height="80" fill="#0E6E55"/>
+    <rect x="120" y="360" width="80" height="80" fill="#0A4434"/>
+    <rect x="200" y="360" width="80" height="80" fill="#0C8B66"/>
+    <rect x="280" y="360" width="80" height="80" fill="#0A4434"/>
+    <rect x="360" y="360" width="80" height="80" fill="#0E6E55"/>
+  </g>
+  <rect x="60" y="60" width="440" height="440" rx="32" stroke="#1A1F1C" stroke-width="2"/>
+  <path d="M160 420H400" stroke="#33FFB4" stroke-width="2" stroke-dasharray="10 12" opacity="0.7"/>
+</svg>

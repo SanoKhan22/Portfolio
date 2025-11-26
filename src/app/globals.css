@@ -1,26 +1,131 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
+  --background: #030503;
+  --foreground: #f6f8f7;
+  --muted: #b2c0b7;
+  --surface: #080d0b;
+  --surface-raised: #0f1512;
+  --accent: #0e6e55;
+  --accent-strong: #33ffb4;
+  --border: #18231d;
+  --pixel: #0c3327;
+  --glow: 0 20px 60px rgba(14, 110, 85, 0.25);
+  --font-body: var(--font-inter);
+  --font-display: var(--font-space-grotesk);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted: var(--muted);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-border: var(--border);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --radius-xs: 0.4rem;
+  --radius-sm: 0.8rem;
+  --radius-md: 1.2rem;
+  --radius-lg: 1.8rem;
+  --shadow-soft: 0 30px 120px rgba(0, 0, 0, 0.45);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #07100c 0%, #020302 55%, #010101 100%);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), system-ui, -apple-system, BlinkMacSystemFont;
+  letter-spacing: 0.02em;
+}
+
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("/assets/pixel-overlay.svg");
+  opacity: 0.04;
+  mix-blend-mode: screen;
+  z-index: 0;
+}
+
+.page-shell {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Mobile-first touch targets */
+a, button, [role="button"] {
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
+}
+
+/* Prevent text size adjustment on iOS */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Better scrolling on mobile */
+body {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Better touch scrolling */
+@media (max-width: 768px) {
+  .snap-x {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .snap-center {
+    scroll-snap-align: center;
+  }
+}
+
+/* Animation utilities */
+.animation-safe {
+  /* Opt-in for animations on mobile */
+  animation-duration: inherit !important;
+  transition-duration: inherit !important;
+}
+
+.no-animation {
+  /* Force disable animations */
+  animation: none !important;
+  transition: none !important;
+}
+
+/* GPU acceleration for transform-heavy animations */
+.gpu-accelerate {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Optimize images for mobile */
+img {
+  max-width: 100%;
+  height: auto;
 }

@@ -1,0 +1,20 @@
+<svg width="560" height="560" viewBox="0 0 560 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="560" height="560" rx="48" fill="url(#grad)"/>
+  <g stroke="#0E6E55" stroke-width="1.5" stroke-opacity="0.65">
+    <rect x="40" y="40" width="80" height="80"/>
+    <rect x="160" y="120" width="60" height="60"/>
+    <rect x="420" y="180" width="90" height="90"/>
+    <rect x="300" y="340" width="70" height="70"/>
+    <rect x="80" y="360" width="110" height="110"/>
+    <path d="M60 240H500" stroke-dasharray="18 10"/>
+    <path d="M140 80L380 520" stroke-dasharray="12 12"/>
+    <circle cx="470" cy="420" r="22"/>
+    <circle cx="110" cy="150" r="18"/>
+  </g>
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="560" y2="560" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#050505"/>
+      <stop offset="1" stop-color="#0E1A17"/>
+    </linearGradient>
+  </defs>
+</svg>
