@@ -6,7 +6,7 @@ export const highlightStats = [
 ];
 
 export const socialLinks = [
-  { label: "LinkedIn", href: "https://linkedin.com/in/sano", icon: "linkedin" },
-  { label: "GitHub", href: "https://github.com/sano", icon: "github" },
+  { label: "LinkedIn", href: "https://linkedin.com/in/ehsanullahsano", icon: "linkedin" },
+  { label: "GitHub", href: "https://github.com/SanoKhan22", icon: "github" },
   { label: "Email", href: "mailto:hey@sano.dev", icon: "mail" },
 ];

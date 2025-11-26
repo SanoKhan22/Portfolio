@@ -14,7 +14,7 @@ export function SiteFooter() {
       <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
         <div>
           <p className="text-white">© {new Date().getFullYear()} Ehsanullah Sano</p>
-          <p>Product engineer & entrepreneur</p>
+          <p>Software Engineer & Startup Builder</p>
         </div>
         <nav className="flex flex-wrap gap-4 text-white/80">
           {quickLinks.map((link) => (
