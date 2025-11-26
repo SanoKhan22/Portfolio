@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion, useMotionValue, useSpring, useTransform, useScroll } from "framer-motion";
 import { BlobMorph } from "@/components/animations/BlobMorph";
+import { CodeRunner } from "@/components/animations/CodeRunner";
 
 // More pixels for smoother animation, fewer on mobile
 const getPixelCount = (isMobile: boolean) => (isMobile ? 20 : 28);
@@ -153,21 +154,14 @@ export function Hero() {
           Building software and digital products that solve real problems.
         </motion.h2>
 
-        {/* New Catchy Description */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-          className="max-w-xl text-sm leading-relaxed text-[var(--color-muted)] sm:text-base md:text-lg"
-        >
-          Code. Ship. Repeat. Building apps that don't crash and products people actually use—without the buzzwords or 47-step deployment pipelines.
-        </motion.p>
+        {/* Interactive Code Demo */}
+        <CodeRunner />
 
-        {/* 3-Button Layout */}
+        {/* 2-Button Layout - Clean & Focused */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
           className="flex flex-col gap-3 sm:flex-row sm:gap-4"
         >
           {/* Primary CTA */}
@@ -178,28 +172,7 @@ export function Hero() {
             See My Work
           </MagneticButton>
 
-          {/* CV Download Button */}
-          <MagneticButton
-            href="/assets/myCV.pdf"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--surface)]/40 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:border-[var(--accent)] hover:bg-[var(--surface)]/60 active:scale-95 sm:px-8 sm:text-base"
-          >
-            <svg
-              className="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              />
-            </svg>
-            Download CV
-          </MagneticButton>
-
-          {/* Tertiary CTA */}
+          {/* Secondary CTA */}
           <MagneticButton
             href="#contact"
             className="inline-flex items-center justify-center rounded-full border border-[var(--color-border)] px-6 py-3 text-sm font-semibold text-white transition hover:border-[var(--accent)] active:scale-95 sm:px-8 sm:text-base"

@@ -3,6 +3,7 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ScrollProgress } from "@/components/animations/ScrollProgress";
 import { CursorFollower } from "@/components/animations/CursorFollower";
+import { SiteHeader } from "@/components/SiteHeader";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -56,6 +57,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}>
         <ScrollProgress />
         <CursorFollower />
+        <SiteHeader />
         <div className="grain-overlay" />
         <div className="page-shell">{children}</div>
       </body>
