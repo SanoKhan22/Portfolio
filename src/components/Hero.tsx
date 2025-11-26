@@ -151,7 +151,7 @@ export function Hero() {
           transition={{ delay: 0.2, duration: 0.6 }}
           className="max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl md:text-2xl"
         >
-          I fix problems with code. Sometimes I create new problems with code. Then I fix those too.
+          <span className="text-[var(--accent)]">"</span>I fix problems with code. Sometimes I create new problems with code. Then I fix those too.<span className="text-[var(--accent)]">"</span>
         </motion.h2>
 
         {/* Interactive Code Demo */}
