@@ -180,11 +180,19 @@ export function Hero() {
         </div>
       </div>
 
+      {/* 3D Perspective Container - Creates depth space */}
       <motion.div
         className="relative isolate flex items-center justify-center lg:justify-end"
-        style={{ y, opacity }}
+        style={{
+          y,
+          opacity,
+          perspective: isMobile ? "none" : "1200px",
+          perspectiveOrigin: "center center"
+        }}
       >
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[rgba(14,110,85,0.2)]/40 to-transparent blur-3xl" />
+
+        {/* Card Frame - Recedes slightly in 3D space */}
         <motion.div
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => {
@@ -193,9 +201,11 @@ export function Hero() {
           }}
           onMouseMove={handleMouseMove}
           style={{
-            rotateX: isHovered ? mousePosition.y * 8 : 0,
-            rotateY: isHovered ? mousePosition.x * 8 : 0,
+            rotateX: isHovered && !isMobile ? mousePosition.y * 6 : 0,
+            rotateY: isHovered && !isMobile ? mousePosition.x * 6 : 0,
             transformStyle: "preserve-3d",
+            // Card recedes back in 3D space (desktop only)
+            transform: isMobile ? "none" : "translateZ(-30px)",
           }}
           animate={{
             y: prefersReducedMotion ? 0 : [0, -10, 0],
@@ -207,7 +217,7 @@ export function Hero() {
               ease: "easeInOut",
             },
           }}
-          className="relative h-[280px] w-[240px] rounded-[24px] border border-[var(--color-border)] bg-[var(--surface)]/60 p-3 shadow-[var(--shadow-soft)] backdrop-blur sm:h-[360px] sm:w-[300px] sm:rounded-[28px] sm:p-4 md:h-[420px] md:w-[360px] md:rounded-[32px] transition-shadow duration-300"
+          className="relative h-[280px] w-[240px] rounded-[24px] border border-[var(--color-border)] bg-[var(--surface)]/60 p-3 shadow-[var(--shadow-soft)] backdrop-blur sm:h-[360px] sm:w-[300px] sm:rounded-[28px] sm:p-4 md:h-[420px] md:w-[360px] md:rounded-[32px] transition-shadow duration-300 overflow-visible"
         >
           {/* Enhanced pixel grid with bounce and rotation */}
           <motion.div
@@ -215,6 +225,9 @@ export function Hero() {
             animate={{ opacity: 0 }}
             transition={{ duration: prefersReducedMotion ? 0 : 0.6, delay: 0.9 }}
             className="grid grid-cols-4 gap-2 sm:gap-3"
+            style={{
+              transform: isMobile ? "none" : "translateZ(0px)",
+            }}
           >
             {heroPixels.map((pixel) => (
               <motion.span
@@ -240,35 +253,58 @@ export function Hero() {
             ))}
           </motion.div>
 
-          {/* Portrait with glow effect */}
+          {/* Portrait - Pops forward in 3D space, breaking out of the frame */}
           <motion.div
             initial={{ scale: prefersReducedMotion ? 1 : 0.92, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: prefersReducedMotion ? 0 : 0.65, duration: 0.6 }}
             whileHover={{
-              scale: 1.02,
+              scale: isMobile ? 1.02 : 1.05,
               boxShadow: "0 0 40px rgba(51, 255, 180, 0.3)",
             }}
-            className="absolute inset-3 overflow-hidden rounded-[20px] sm:inset-4 sm:rounded-[24px] md:inset-6 md:rounded-[28px] transition-all duration-300"
+            style={{
+              // Portrait extends forward in 3D space (desktop only)
+              transform: isMobile ? "none" : "translateZ(70px) scale(1.12)",
+              zIndex: 10,
+              // Cast shadow onto card behind
+              filter: isMobile ? "none" : "drop-shadow(0 25px 35px rgba(0, 0, 0, 0.5))",
+            }}
+            className="absolute inset-3 overflow-visible rounded-[20px] sm:inset-4 sm:rounded-[24px] md:inset-2 md:rounded-[28px] transition-all duration-300"
           >
-            <Image
-              src="/assets/potrait.png"
-              alt="Ehsanullah Sano portrait"
-              fill
-              sizes="(max-width: 640px) 240px, (max-width: 768px) 300px, 360px"
-              className="object-cover"
-              priority
-            />
-            {/* Glow overlay on hover */}
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-br from-[rgba(51,255,180,0.1)] to-transparent pointer-events-none"
-              animate={{
-                opacity: isHovered ? 1 : 0,
-              }}
-              transition={{ duration: 0.3 }}
-            />
+            <div className="relative w-full h-full overflow-hidden rounded-[inherit]">
+              <Image
+                src="/assets/potrait.png"
+                alt="Ehsanullah Sano portrait"
+                fill
+                sizes="(max-width: 640px) 240px, (max-width: 768px) 300px, 400px"
+                className="object-cover"
+                priority
+              />
+              {/* Glow overlay on hover */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-br from-[rgba(51,255,180,0.15)] to-transparent pointer-events-none"
+                animate={{
+                  opacity: isHovered ? 1 : 0,
+                }}
+                transition={{ duration: 0.3 }}
+              />
+
+              {/* Edge highlight - emphasizes the "breaking out" effect */}
+              {!isMobile && (
+                <motion.div
+                  className="absolute inset-0 rounded-[inherit] pointer-events-none"
+                  animate={{
+                    boxShadow: isHovered
+                      ? "0 0 30px rgba(51, 255, 180, 0.4), inset 0 0 20px rgba(51, 255, 180, 0.1)"
+                      : "0 0 15px rgba(51, 255, 180, 0.2)",
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
+              )}
+            </div>
           </motion.div>
 
+          {/* Badges - positioned in 3D space */}
           {!isMobile &&
             heroBadges.map((badge) => (
               <motion.div
@@ -276,6 +312,9 @@ export function Hero() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: prefersReducedMotion ? 0 : 1 }}
+                style={{
+                  transform: "translateZ(40px)", // Badges float between card and portrait
+                }}
                 className={`absolute ${badge.position} hidden md:block`}
               >
                 <div className="rounded-xl border border-[var(--color-border)] bg-[var(--surface-raised)]/70 px-3 py-2 text-xs text-white shadow-lg backdrop-blur sm:rounded-2xl sm:px-4 sm:py-3 sm:text-sm">
