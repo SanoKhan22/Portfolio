@@ -151,7 +151,7 @@ export function Hero() {
           transition={{ delay: 0.2, duration: 0.6 }}
           className="text-xl leading-relaxed text-white/90 sm:text-2xl md:text-3xl lg:text-4xl"
         >
-          Building software and digital products that solve real problems.
+          I fix problems with code. Sometimes I create new problems with code. Then I fix those too.
         </motion.h2>
 
         {/* Interactive Code Demo */}
