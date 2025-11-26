@@ -126,7 +126,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="font-display text-5xl font-bold leading-tight text-white sm:text-6xl md:text-7xl lg:text-8xl"
+            className="font-display text-6xl font-bold tracking-tight text-white sm:text-7xl md:text-8xl lg:text-9xl"
           >
             <span className="bg-gradient-to-r from-white via-white to-[var(--accent-strong)] bg-clip-text text-transparent">
               Ehsanullah Sano
@@ -138,7 +138,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.6 }}
-            className="text-lg font-medium tracking-wide text-[var(--accent-strong)] md:text-xl lg:text-2xl"
+            className="text-xl font-medium tracking-wide text-[var(--accent)] md:text-2xl lg:text-3xl"
           >
             Software Engineer & Startup Builder
           </motion.p>
@@ -149,7 +149,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="text-xl leading-relaxed text-white/90 sm:text-2xl md:text-3xl lg:text-4xl"
+          className="max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl md:text-2xl"
         >
           I fix problems with code. Sometimes I create new problems with code. Then I fix those too.
         </motion.h2>
