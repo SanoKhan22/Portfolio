@@ -18,13 +18,13 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://portfolio.sano.dev"),
-  title: "Ehsanullah Sano — Product-Focused Software Engineer",
+  title: "Ehsanullah Sano — Software Engineer & Startup Builder",
   description:
-    "I build premium cross-platform apps, growth loops, and data-backed digital products that move business metrics.",
+    "Code. Ship. Repeat. Building apps that don't crash and products people actually use. Android • iOS • Web",
   openGraph: {
-    title: "Ehsanullah Sano — Product-Focused Software Engineer",
+    title: "Ehsanullah Sano — Software Engineer & Startup Builder",
     description:
-      "Premium engineering + product thinking across Android, iOS, and growth stacks.",
+      "Building software and digital products that solve real problems. Android • iOS • Web",
     url: "https://portfolio.sano.dev",
     siteName: "Ehsanullah Sano Portfolio",
     locale: "en_US",
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ehsanullah Sano — Product-Focused Software Engineer",
+    title: "Ehsanullah Sano — Software Engineer & Startup Builder",
     description:
-      "Cross-platform engineer and entrepreneur building revenue-focused products.",
+      "Code. Ship. Repeat. Building mobile and web products that actually work.",
   },
   keywords: [
     "software engineer",
