@@ -8,6 +8,7 @@ import { TestimonialsSlider } from "@/components/TestimonialsSlider";
 import { ContactCta } from "@/components/ContactCta";
 import { SiteFooter } from "@/components/SiteFooter";
 import FloatingHeader from "@/components/FloatingHeader";
+import GitHubTest from "@/components/GitHubTest";
 
 export default function Home() {
   return (
@@ -17,6 +18,10 @@ export default function Home() {
         <section id="home">
           <Hero />
         </section>
+        
+        {/* GitHub API Test - Remove after verification */}
+        <GitHubTest />
+        
         <section id="skills">
           <SkillsCarousel />
         </section>
