@@ -21,8 +21,6 @@ const PRODUCTION_REPOS_QUERY = `
           description
           url
           homepageUrl
-          stargazerCount
-          forkCount
           primaryLanguage {
             name
             color
@@ -43,6 +41,15 @@ const PRODUCTION_REPOS_QUERY = `
               }
             }
           }
+          defaultBranchRef {
+            target {
+              ... on Commit {
+                history {
+                  totalCount
+                }
+              }
+            }
+          }
           updatedAt
           createdAt
           pushedAt
@@ -60,16 +67,30 @@ export async function GET() {
 
     const repos = response.user.repositories.nodes;
 
-    // Filter for production repos
-    const productionRepos = repos.filter((repo: any) => {
-      const hasProductionTopic = repo.repositoryTopics.nodes.some(
-        (topic: any) => topic.topic.name === "production"
-      );
-      const hasHomepage = repo.homepageUrl !== null;
-      return hasProductionTopic || hasHomepage;
-    });
+    // Filter for repos with "production" or "feat" topics
+    const featuredRepos = repos
+      .filter((repo: any) => {
+        const topics = repo.repositoryTopics.nodes.map(
+          (topic: any) => topic.topic.name.toLowerCase()
+        );
+        return topics.includes("production") || topics.includes("feat");
+      })
+      .map((repo: any) => ({
+        ...repo,
+        commitCount: repo.defaultBranchRef?.target?.history?.totalCount || 0,
+      }))
+      .sort((a: any, b: any) => b.commitCount - a.commitCount)
+      .slice(0, 3); // Limit to top 3 repos
 
-    return NextResponse.json({ repos: productionRepos });
+    // Debug logging
+    console.log(`[GitHub API] Filtered ${featuredRepos.length} repos from ${repos.length} total`);
+    console.log('[GitHub API] Featured repos:', featuredRepos.map((r: any) => ({ 
+      name: r.name, 
+      commits: r.commitCount,
+      topics: r.repositoryTopics.nodes.map((t: any) => t.topic.name)
+    })));
+
+    return NextResponse.json({ repos: featuredRepos });
   } catch (error: any) {
     console.error("GitHub API Error:", error);
     return NextResponse.json(

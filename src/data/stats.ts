@@ -1,5 +1,4 @@
 export const highlightStats = [
-  { label: "Apps shipped", value: "6" },
   { label: "Users reached", value: "50k+" },
   { label: "Retention lift", value: "+25%" },
   { label: "Experiments", value: "120+" },

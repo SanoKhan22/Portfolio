@@ -2,13 +2,15 @@ import { Hero } from "@/components/Hero";
 import { SkillsCarousel } from "@/components/SkillsCarousel";
 import { StatsSection } from "@/components/StatsSection";
 import { SignatureProjects } from "@/components/SignatureProjects";
+import { PremiumFeaturedProjects } from "@/components/PremiumFeaturedProjects";
+import { GitHubContributionsCalendar } from "@/components/GitHubContributionsCalendar";
+import { Timeline } from "@/components/Timeline";
 import { BuildingNow } from "@/components/BuildingNow";
 import { AboutBrand } from "@/components/AboutBrand";
 import { TestimonialsSlider } from "@/components/TestimonialsSlider";
 import { ContactCta } from "@/components/ContactCta";
 import { SiteFooter } from "@/components/SiteFooter";
 import FloatingHeader from "@/components/FloatingHeader";
-import GitHubTest from "@/components/GitHubTest";
 
 export default function Home() {
   return (
@@ -19,18 +21,28 @@ export default function Home() {
           <Hero />
         </section>
         
-        {/* GitHub API Test - Remove after verification */}
-        <GitHubTest />
-        
         <section id="skills">
           <SkillsCarousel />
         </section>
         <section id="stats">
           <StatsSection />
         </section>
-        <section id="projects">
+        
+        {/* Premium Featured Projects from GitHub */}
+        <section id="featured-projects">
+          <PremiumFeaturedProjects />
+        </section>
+        
+        {/* Static Signature Projects */}
+        <section id="signature-projects">
           <SignatureProjects />
         </section>
+        
+        {/* GitHub Contributions Calendar */}
+        <section id="contributions">
+          <GitHubContributionsCalendar />
+        </section>
+        
         <section id="building">
           <BuildingNow />
         </section>
@@ -40,6 +52,12 @@ export default function Home() {
         <section id="testimonials">
           <TestimonialsSlider />
         </section>
+        
+        {/* Timeline & Experience */}
+        <section id="experience">
+          <Timeline />
+        </section>
+        
         <section id="contact">
           <ContactCta />
         </section>

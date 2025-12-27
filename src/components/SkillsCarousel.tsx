@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import { skillCategories } from "@/data/skills";
-import { InfiniteMarquee } from "@/components/animations/InfiniteMarquee";
+import { PremiumSkillsMarquee } from "@/components/animations/PremiumSkillsMarquee";
+import { GitHubLanguageStats } from "@/components/GitHubLanguageStats";
 
 export function SkillsCarousel() {
   // Collect all unique skills for marquee
@@ -23,9 +24,14 @@ export function SkillsCarousel() {
         </div>
       </div>
 
-      {/* Infinite scrolling skills marquee */}
-      <div className="-mx-4 overflow-hidden py-4 md:-mx-6">
-        <InfiniteMarquee items={allSkills} speed={25} />
+      {/* Premium infinite scrolling skills marquee with custom fonts */}
+      <div className="-mx-4 md:-mx-6">
+        <PremiumSkillsMarquee items={allSkills} />
+      </div>
+
+      {/* GitHub Language Statistics */}
+      <div className="mt-8">
+        <GitHubLanguageStats />
       </div>
 
       <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 scrollbar-hide md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:pb-0">

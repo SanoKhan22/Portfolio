@@ -6,6 +6,8 @@ import Link from "next/link";
 import { motion, useReducedMotion, useMotionValue, useSpring, useTransform, useScroll } from "framer-motion";
 import { BlobMorph } from "@/components/animations/BlobMorph";
 import { CodeRunner } from "@/components/animations/CodeRunner";
+import { useGitHubTimeline } from "@/hooks/useGitHub";
+import { Rocket, Layers, Code2 } from "lucide-react";
 
 // More pixels for smoother animation, fewer on mobile
 const getPixelCount = (isMobile: boolean) => (isMobile ? 20 : 28);
@@ -18,22 +20,11 @@ const createHeroPixels = (count: number) =>
     bounceDelay: 0.02 * index,
   }));
 
-const heroBadges = [
-  {
-    label: "Android + iOS",
-    detail: "Compose · SwiftUI",
-    position: "top-10 -left-4",
-  },
-  {
-    label: "Growth Ops",
-    detail: "GA4 · Paid Media",
-    position: "top-2 right-0",
-  },
-  {
-    label: "MVPs",
-    detail: "0 → 1 in 8 weeks",
-    position: "bottom-6 left-4",
-  },
+// Dynamic tech badge positions in 3D space
+const badgePositions = [
+  { position: "top-8 -left-6", zIndex: 35, translateZ: 50 },
+  { position: "top-2 -right-4", zIndex: 35, translateZ: 40 },
+  { position: "bottom-8 left-2", zIndex: 35, translateZ: 45 },
 ];
 
 function MagneticButton({ children, href, className, ...props }: { children: React.ReactNode; href: string; className?: string;[key: string]: any }) {
@@ -80,10 +71,69 @@ export function Hero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [heroPixels, setHeroPixels] = useState<Array<{ id: number; delay: number; rotation: number; bounceDelay: number }>>([]);
   const { scrollY } = useScroll();
+  const { timelineRepos } = useGitHubTimeline();
 
-  // Parallax effect
-  const y = useTransform(scrollY, [0, 500], [0, 100]);
+  // Enhanced parallax with multiple layers
+  const yBackground = useTransform(scrollY, [0, 500], [0, 150]);
+  const yPortrait = useTransform(scrollY, [0, 500], [0, 80]);
+  const yBadges = useTransform(scrollY, [0, 500], [0, 60]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0.7]);
+
+  // Generate dynamic tech badges from GitHub repos
+  const dynamicBadges = (() => {
+    // Badge 1: Startup Builder / Entrepreneurship (Static, aligned with personal brand)
+    const badge1 = {
+      label: "Startup Builder",
+      detail: "0 → 1 MVPs",
+      icon: Rocket,
+      color: "text-orange-400",
+    };
+
+    // Badge 2: Core Expertise (Based on website analysis)
+    // User builds mobile (Android/iOS) + web apps, so highlighting cross-platform expertise
+    const badge2 = {
+      label: "Mobile + Web",
+      detail: "iOS · Android · React",
+      icon: Layers,
+      color: "text-blue-400",
+    };
+
+    // Badge 3: Top 3 Programming Languages from GitHub (Dynamic)
+    let badge3 = {
+      label: "Tech Stack",
+      detail: "Java · Kotlin · JS",
+      icon: Code2,
+      color: "text-green-400",
+    };
+
+    if (timelineRepos && timelineRepos.length > 0) {
+      const languageCounts: Record<string, number> = {};
+      
+      timelineRepos.forEach((repo) => {
+        if (repo.primaryLanguage && 
+            repo.primaryLanguage.toLowerCase() !== 'unknown' &&
+            repo.primaryLanguage.trim() !== '') {
+          languageCounts[repo.primaryLanguage] = (languageCounts[repo.primaryLanguage] || 0) + 1;
+        }
+      });
+
+      const topLanguages = Object.entries(languageCounts)
+        .sort(([, a], [, b]) => b - a)
+        .slice(0, 3)
+        .map(([lang]) => lang);
+
+      if (topLanguages.length > 0) {
+        badge3 = {
+          label: "Languages",
+          detail: topLanguages.join(" · "),
+          icon: Code2,
+          color: "text-green-400",
+        };
+      }
+    }
+
+    return [badge1, badge2, badge3];
+  })();
 
   useEffect(() => {
     const checkMobile = () => {
@@ -186,9 +236,9 @@ export function Hero() {
       <motion.div
         className="relative isolate flex items-center justify-center lg:justify-end"
         style={{
-          y,
+          y: yBackground,
           opacity,
-          perspective: isMobile ? "none" : "1200px",
+          perspective: isMobile ? "none" : "1400px",
           perspectiveOrigin: "center center"
         }}
       >
@@ -255,21 +305,23 @@ export function Hero() {
             ))}
           </motion.div>
 
-          {/* Portrait - Pops forward in 3D space, breaking out of the frame */}
+          {/* Portrait - Pops forward in 3D space with parallax */}
           <motion.div
             initial={{ scale: prefersReducedMotion ? 1 : 0.92, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: prefersReducedMotion ? 0 : 0.65, duration: 0.6 }}
             whileHover={{
-              scale: isMobile ? 1.02 : 1.05,
-              boxShadow: "0 0 40px rgba(51, 255, 180, 0.3)",
+              scale: isMobile ? 1.02 : 1.08,
+              boxShadow: "0 0 50px rgba(51, 255, 180, 0.4)",
+              rotateY: isMobile ? 0 : 2,
             }}
             style={{
-              // Portrait extends forward in 3D space (desktop only)
-              transform: isMobile ? "none" : "translateZ(70px) scale(1.12)",
+              // Portrait extends forward in 3D space with parallax (desktop only)
+              transform: isMobile ? "none" : "translateZ(80px) scale(1.14)",
+              y: yPortrait,
               zIndex: 10,
-              // Cast shadow onto card behind
-              filter: isMobile ? "none" : "drop-shadow(0 25px 35px rgba(0, 0, 0, 0.5))",
+              // Enhanced shadow casting
+              filter: isMobile ? "none" : "drop-shadow(0 30px 45px rgba(0, 0, 0, 0.6))",
             }}
             className="absolute inset-3 overflow-visible rounded-[20px] sm:inset-4 sm:rounded-[24px] md:inset-2 md:rounded-[28px] transition-all duration-300"
           >
@@ -306,25 +358,49 @@ export function Hero() {
             </div>
           </motion.div>
 
-          {/* Badges - positioned in 3D space */}
+          {/* Dynamic Tech Badges - positioned in 3D space with parallax */}
           {!isMobile &&
-            heroBadges.map((badge) => (
-              <motion.div
-                key={badge.label}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: prefersReducedMotion ? 0 : 1 }}
-                style={{
-                  transform: "translateZ(40px)", // Badges float between card and portrait
-                }}
-                className={`absolute ${badge.position} hidden md:block`}
-              >
-                <div className="rounded-xl border border-[var(--color-border)] bg-[var(--surface-raised)]/70 px-3 py-2 text-xs text-white shadow-lg backdrop-blur sm:rounded-2xl sm:px-4 sm:py-3 sm:text-sm">
-                  <p className="font-semibold">{badge.label}</p>
-                  <p className="text-[10px] text-[var(--color-muted)] sm:text-xs">{badge.detail}</p>
-                </div>
-              </motion.div>
-            ))}
+            dynamicBadges.map((badge, index) => {
+              const config = badgePositions[index];
+              if (!config) return null;
+              const IconComponent = badge.icon;
+              return (
+                <motion.div
+                  key={badge.label}
+                  initial={{ opacity: 0, y: 20, scale: 0.8 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ 
+                    delay: prefersReducedMotion ? 0 : 1 + index * 0.1,
+                    type: "spring",
+                    stiffness: 200,
+                    damping: 15
+                  }}
+                  whileHover={{
+                    scale: 1.1,
+                    y: -5,
+                    boxShadow: "0 10px 30px rgba(51, 255, 180, 0.3)",
+                  }}
+                  style={{
+                    transform: `translateZ(${config.translateZ}px)`,
+                    y: yBadges,
+                    zIndex: config.zIndex,
+                  }}
+                  className={`absolute ${config.position} hidden md:block cursor-default`}
+                >
+                  <div className="group rounded-xl border border-[var(--color-border)] bg-[var(--surface-raised)]/80 px-3 py-2.5 text-xs text-white shadow-lg backdrop-blur-xl transition-all duration-300 hover:border-[var(--accent)]/50 sm:rounded-2xl sm:px-4 sm:py-3 sm:text-sm">
+                    <div className="flex items-center gap-2.5">
+                      <div className={`rounded-lg bg-[var(--surface)]/50 p-1.5 transition-transform group-hover:scale-110 ${badge.color}`}>
+                        <IconComponent className="h-4 w-4 sm:h-5 sm:w-5" strokeWidth={2.5} />
+                      </div>
+                      <div>
+                        <p className="font-semibold">{badge.label}</p>
+                        <p className="text-[10px] text-[var(--color-muted)] sm:text-xs">{badge.detail}</p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
         </motion.div>
       </motion.div>
     </section >

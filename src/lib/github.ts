@@ -6,8 +6,6 @@ export interface GitHubRepo {
   description: string;
   url: string;
   homepageUrl: string | null;
-  stargazerCount: number;
-  forkCount: number;
   primaryLanguage: {
     name: string;
     color: string;
@@ -28,6 +26,14 @@ export interface GitHubRepo {
       };
     }>;
   };
+  defaultBranchRef: {
+    target: {
+      history: {
+        totalCount: number;
+      };
+    };
+  } | null;
+  commitCount?: number;
   updatedAt: string;
   createdAt: string;
   pushedAt: string;
@@ -159,8 +165,10 @@ export async function getGitHubStats(
     const repos = await getProductionRepos(username);
 
     const totalRepos = repos.length;
-    const totalStars = repos.reduce((sum, repo) => sum + repo.stargazerCount, 0);
-    const totalForks = repos.reduce((sum, repo) => sum + repo.forkCount, 0);
+    // Note: Stars and forks are removed from the new API response
+    // These values are now set to 0 for backward compatibility
+    const totalStars = 0;
+    const totalForks = 0;
 
     // Calculate language statistics
     const languageMap = new Map<
