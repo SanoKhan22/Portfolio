@@ -3,6 +3,7 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ScrollProgress } from "@/components/animations/ScrollProgress";
 import { CursorFollower } from "@/components/animations/CursorFollower";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -52,12 +53,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}>
-        <ScrollProgress />
-        <CursorFollower />
-        <div className="grain-overlay" />
-        <div className="page-shell">{children}</div>
+        <ThemeProvider>
+          <ScrollProgress />
+          <CursorFollower />
+          <div className="grain-overlay" />
+          <div className="page-shell">{children}</div>
+        </ThemeProvider>
       </body>
     </html>
   );
