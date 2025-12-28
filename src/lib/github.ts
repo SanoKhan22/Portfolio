@@ -35,6 +35,7 @@ export interface GitHubRepo {
   } | null;
   commitCount?: number;
   stargazerCount: number;
+  forkCount: number;
   updatedAt: string;
   createdAt: string;
   pushedAt: string;
