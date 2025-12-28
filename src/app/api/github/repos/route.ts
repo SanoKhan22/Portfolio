@@ -50,6 +50,8 @@ const PRODUCTION_REPOS_QUERY = `
               }
             }
           }
+          stargazerCount
+          forkCount
           updatedAt
           createdAt
           pushedAt
