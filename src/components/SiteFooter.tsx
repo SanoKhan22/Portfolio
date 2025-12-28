@@ -10,7 +10,7 @@ const quickLinks = [
 
 export function SiteFooter() {
   return (
-    <footer className="mt-20 border-t border-[var(--color-border)]/50 bg-[var(--surface)]/30 backdrop-blur-sm">
+    <footer className="mt-20 border-t border-[var(--color-border)]/50 bg-[var(--surface)]/80 text-[var(--color-muted)] backdrop-blur-md dark:bg-[var(--surface)]/90 dark:text-[var(--color-muted)]">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-10 md:flex-row md:justify-between">
           {/* Brand & Copyright */}
