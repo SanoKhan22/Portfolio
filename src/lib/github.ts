@@ -34,6 +34,7 @@ export interface GitHubRepo {
     };
   } | null;
   commitCount?: number;
+  stargazerCount: number;
   updatedAt: string;
   createdAt: string;
   pushedAt: string;
