@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, Instrument_Sans } from "next/font/google";
 import "./globals.css";
 import { ScrollProgress } from "@/components/animations/ScrollProgress";
 import { CursorFollower } from "@/components/animations/CursorFollower";
@@ -11,9 +11,9 @@ const inter = Inter({
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
-  variable: "--font-space-grotesk",
+  variable: "--font-instrument-sans",
   display: "swap",
 });
 
@@ -54,7 +54,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}>
+      <body className={`${inter.variable} ${instrumentSans.variable} antialiased`}>
         <ThemeProvider>
           <ScrollProgress />
           <CursorFollower />

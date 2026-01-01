@@ -13,9 +13,9 @@ export const skillCategories: SkillCategory[] = [
       "Android / Kotlin / Jetpack Compose",
       "iOS / SwiftUI / Combine",
       "Flutter / KMM for shared layers",
-      "Node.js / Python services with Firebase + REST",
+      "Node.js / Python / Java services with Firebase + REST",
     ],
-    stack: ["Kotlin", "Swift", "Flutter", "Firebase", "Node.js", "Python"],
+    stack: ["Android", "iOS", "Kotlin", "Swift", "Flutter", "Java", "JavaScript", "TypeScript", "React", "Firebase", "Node.js", "Python", "PostgreSQL", "Docker", "Kubernetes", "GitHub", "GitLab", "Copilot", "Cursor"],
   },
   {
     title: "Product & Growth",
@@ -26,7 +26,7 @@ export const skillCategories: SkillCategory[] = [
       "Ad campaign setup, retargeting, and experimentation",
       "E-commerce integrations (Shopify / WooCommerce)",
     ],
-    stack: ["MVP", "GA4", "Analytics", "Ads", "Shopify", "WooCommerce"],
+    stack: ["MVP", "Analytics", "Ads", "Shopify", "WooCommerce"],
   },
   {
     title: "Operating System",
