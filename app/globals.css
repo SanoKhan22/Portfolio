@@ -13,7 +13,7 @@
   --pixel: #0c3327;
   --glow: 0 20px 60px rgba(14, 110, 85, 0.25);
   --font-body: var(--font-inter);
-  --font-display: var(--font-space-grotesk);
+  --font-display: var(--font-instrument-sans);
   
   /* RGB values for accent colors (for opacity control) */
   --color-accent-rgb: 14, 110, 85;
