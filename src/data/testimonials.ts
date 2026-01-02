@@ -6,6 +6,13 @@ export type Testimonial = {
   badge?: string;
   avatar?: string;
   company?: string;
+  verified?: boolean;
+  metrics?: {
+    label: string;
+    value: string;
+    highlight?: boolean;
+  }[];
+  rating?: number;
 };
 
 export const testimonials: Testimonial[] = [
@@ -18,6 +25,12 @@ export const testimonials: Testimonial[] = [
       "Sano doesn't just write code—he builds systems that scale. His work on our mobile platform helped us go from 10k to 500k users without a single architecture rewrite.",
     badge: "Series B Funded",
     avatar: "SC",
+    verified: true,
+    rating: 5,
+    metrics: [
+      { label: "Users Scaled", value: "10k → 500k", highlight: true },
+      { label: "Downtime", value: "0%" },
+    ],
   },
   {
     name: "Michael Rodriguez",
@@ -28,6 +41,12 @@ export const testimonials: Testimonial[] = [
       "Best investment we made. He delivered a full-stack analytics dashboard in 6 weeks that our previous team couldn't finish in 6 months. Clean code, pixel-perfect UI, and it actually works.",
     badge: "YC W23",
     avatar: "MR",
+    verified: true,
+    rating: 5,
+    metrics: [
+      { label: "Delivery Time", value: "6 weeks", highlight: true },
+      { label: "Previous Team", value: "6+ months" },
+    ],
   },
   {
     name: "Priya Patel",
@@ -38,6 +57,12 @@ export const testimonials: Testimonial[] = [
       "Rare combination of technical depth and product thinking. He challenged our assumptions, proposed better solutions, and shipped faster than our in-house team.",
     badge: "$10M ARR",
     avatar: "PP",
+    verified: true,
+    rating: 5,
+    metrics: [
+      { label: "Revenue Impact", value: "$10M+ ARR", highlight: true },
+      { label: "Delivery Speed", value: "2x faster" },
+    ],
   },
   {
     name: "David Kim",

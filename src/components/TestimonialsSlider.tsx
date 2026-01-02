@@ -1,15 +1,19 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { testimonials } from "@/data/testimonials";
-import { Quote } from "lucide-react";
+import { Quote, Star, CheckCircle2, TrendingUp, Zap } from "lucide-react";
 
 export function TestimonialsSlider() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
+  // Duplicate testimonials for seamless loop
+  const displayTestimonials = testimonials.slice(0, 3);
+  const duplicatedTestimonials = [...displayTestimonials, ...displayTestimonials];
+
   return (
-    <section id="social-proof" className="space-y-8 py-12">
+    <section id="social-proof" className="relative overflow-hidden space-y-8 py-12">
       <div className="flex flex-col gap-3">
         <div>
           <p className="text-xs uppercase tracking-[0.2em] text-[var(--color-muted)] md:text-sm md:tracking-[0.3em]">
@@ -21,17 +25,74 @@ export function TestimonialsSlider() {
         </div>
       </div>
 
-      {/* Grid Layout */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {testimonials.map((testimonial, idx) => (
+      {/* Dual Infinite Marquee */}
+      <div className="space-y-6">
+        {/* First Row - Scrolls Right */}
+        <div className="relative">
+          <motion.div
+            className="flex gap-6"
+            animate={{
+              x: ["-50%", "0%"],
+            }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 30,
+                ease: "linear",
+              },
+            }}
+          >
+            {duplicatedTestimonials.map((testimonial, idx) => (
+              <TestimonialCard
+                key={`row1-${idx}`}
+                testimonial={testimonial}
+                index={idx}
+                hoveredIndex={hoveredIndex}
+                setHoveredIndex={setHoveredIndex}
+              />
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Second Row - Scrolls Left */}
+        <div className="relative">
+          <motion.div
+            className="flex gap-6"
+            animate={{
+              x: ["0%", "-50%"],
+            }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 30,
+                ease: "linear",
+              },
+            }}
+          >
+            {duplicatedTestimonials.map((testimonial, idx) => (
+              <TestimonialCard
+                key={`row2-${idx}`}
+                testimonial={testimonial}
+                index={idx}
+                hoveredIndex={hoveredIndex}
+                setHoveredIndex={setHoveredIndex}
+              />
+            ))}
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Static Grid for Mobile */}
+      <div className="grid gap-6 md:hidden">
+        {displayTestimonials.map((testimonial, idx) => (
           <motion.div
             key={testimonial.name}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: idx * 0.1 }}
-            onHoverStart={() => setHoveredIndex(idx)}
-            onHoverEnd={() => setHoveredIndex(null)}
             className="group relative overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--surface)]/50 p-6 backdrop-blur-sm transition-all hover:border-[var(--accent)]/50 hover:bg-[var(--surface)]/70"
           >
             {/* Gradient Glow Effect */}

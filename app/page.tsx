@@ -4,7 +4,7 @@ import { StatsSection } from "@/components/StatsSection";
 import { PremiumFeaturedProjects } from "@/components/PremiumFeaturedProjects";
 import { GitHubContributionsCalendar } from "@/components/GitHubContributionsCalendar";
 import { Timeline } from "@/components/Timeline";
-import { TestimonialsSlider } from "@/components/TestimonialsSlider";
+import { EnhancedTestimonials } from "@/components/EnhancedTestimonials";
 import { ContactCta } from "@/components/ContactCta";
 import { SiteFooter } from "@/components/SiteFooter";
 import FloatingHeader from "@/components/FloatingHeader";
@@ -36,7 +36,7 @@ export default function Home() {
         </section>
         
         <section id="testimonials">
-          <TestimonialsSlider />
+          <EnhancedTestimonials />
         </section>
         
         {/* Timeline & Experience */}
