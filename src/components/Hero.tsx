@@ -193,6 +193,24 @@ export function Hero() {
           >
             Software Engineer & Startup Builder
           </motion.p>
+
+          {/* Education */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.6 }}
+            className="text-base text-white/70 md:text-lg"
+          >
+            Computer Science Student @{" "}
+            <a
+              href="https://www.elte.hu/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--accent)] hover:text-[var(--accent-strong)] transition-colors underline decoration-[var(--accent)]/30 hover:decoration-[var(--accent-strong)] underline-offset-4"
+            >
+              ELTE
+            </a>
+          </motion.p>
         </div>
 
         {/* Tagline */}

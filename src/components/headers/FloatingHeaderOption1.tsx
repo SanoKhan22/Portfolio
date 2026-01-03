@@ -18,12 +18,22 @@ export default function FloatingHeaderOption1() {
   const { isScrolled } = useScrollPosition();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [showFullName, setShowFullName] = useState(true);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
     restDelta: 0.001,
   });
+
+  // Animate name change after 2 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowFullName(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -95,14 +105,49 @@ export default function FloatingHeaderOption1() {
           
           <nav className="px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
-              {/* Logo */}
+              {/* Logo with Animated Name */}
               <motion.button
                 onClick={() => scrollToSection("home")}
-                className="text-2xl font-bold font-display bg-gradient-to-r from-white to-[var(--accent)] bg-clip-text text-transparent hover:from-[var(--accent)] hover:to-[var(--accent-strong)] transition-all"
+                className="text-2xl font-bold font-display relative whitespace-nowrap text-white"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Sano
+                {/* Ehsanullah - Particle Dispersion Effect */}
+                <span className="relative inline-block mr-2">
+                  {"Ehsanullah".split("").map((char, index) => (
+                    <motion.span
+                      key={index}
+                      className="inline-block"
+                      animate={{
+                        opacity: showFullName ? 1 : 0,
+                        x: showFullName ? 0 : (index % 2 === 0 ? -50 : 50),
+                        y: showFullName ? 0 : (Math.random() - 0.5) * 100,
+                        scale: showFullName ? 1 : 0,
+                        rotate: showFullName ? 0 : (Math.random() - 0.5) * 360,
+                      }}
+                      transition={{
+                        duration: 0.6,
+                        delay: index * 0.03,
+                        ease: "easeInOut",
+                      }}
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                </span>
+                <motion.span
+                  className="inline-block"
+                  animate={{
+                    x: showFullName ? 0 : -148,
+                  }}
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.3,
+                    ease: "easeInOut",
+                  }}
+                >
+                  Sano
+                </motion.span>
               </motion.button>
 
               {/* Desktop Navigation with Active Indicators */}

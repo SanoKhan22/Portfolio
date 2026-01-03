@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { socialLinks } from "@/data/stats";
-import { MapPin, Clock, Activity } from "lucide-react";
+import { MapPin, Clock, Activity, GraduationCap } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const quickLinks = [
@@ -107,6 +107,20 @@ export function SiteFooter() {
               <div className="flex items-center gap-2">
                 <Activity className="h-3.5 w-3.5 text-green-500" />
                 <span className="text-green-400">Available for work</span>
+              </div>
+              <div className="flex items-center gap-2 pt-2 mt-2 border-t border-[var(--color-border)]/30">
+                <GraduationCap className="h-4 w-4 text-[var(--accent)]" />
+                <span className="text-white/60">
+                  Computer Science Student @{" "}
+                  <a
+                    href="https://www.elte.hu/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[var(--accent)] hover:text-[var(--accent-strong)] transition-colors underline decoration-[var(--accent)]/30 hover:decoration-[var(--accent-strong)]"
+                  >
+                    ELTE University, Hungary
+                  </a>
+                </span>
               </div>
             </div>
           </div>
