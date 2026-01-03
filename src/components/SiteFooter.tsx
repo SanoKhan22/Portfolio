@@ -80,15 +80,15 @@ export function SiteFooter() {
   }, []);
 
   return (
-    <footer className="relative mt-20 overflow-hidden border-t border-[var(--color-border)]/50 bg-[var(--surface)]/90 text-[var(--color-muted)] backdrop-blur-md">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent to-[var(--accent)]/5" />
+    <footer className="relative mt-20 overflow-hidden border-t border-[var(--color-border)]/40 bg-gradient-to-b from-[var(--surface)]/95 to-[var(--surface-raised)]/95 text-[var(--color-muted)] backdrop-blur-md shadow-[0_-8px_32px_rgba(0,0,0,0.06)]">
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[var(--accent)]/3 to-transparent" />
       
       <div className="relative mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         {/* Three Column Layout */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:divide-x md:divide-[var(--color-border)]/30">
           
           {/* Left Section: About & Status */}
-          <div className="flex flex-col gap-3 transition-all hover:bg-[var(--surface-raised)]/30 md:pr-6 md:rounded-l-lg md:p-4">
+          <div className="flex flex-col gap-3 transition-all hover:bg-[var(--accent)]/5 md:pr-6 md:rounded-l-lg md:p-4">
             <div>
               <h3 className="text-sm font-bold text-[var(--foreground)]">Ehsanullah Sano</h3>
               <p className="text-xs text-[var(--accent-strong)]">Software Engineer</p>
@@ -126,7 +126,7 @@ export function SiteFooter() {
           </div>
 
           {/* Center Section: Navigation */}
-          <div className="flex flex-col gap-3 transition-all hover:bg-[var(--surface-raised)]/30 md:px-6 md:p-4">
+          <div className="flex flex-col gap-3 transition-all hover:bg-[var(--accent)]/5 md:px-6 md:p-4">
             <h4 className="text-xs font-semibold uppercase tracking-wide text-[var(--foreground)]">Navigate</h4>
             <nav className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
               {quickLinks.map((link) => (
@@ -142,7 +142,7 @@ export function SiteFooter() {
           </div>
 
           {/* Right Section: Connect & CV */}
-          <div className="flex flex-col gap-3 transition-all hover:bg-[var(--surface-raised)]/30 md:pl-6 md:rounded-r-lg md:p-4">
+          <div className="flex flex-col gap-3 transition-all hover:bg-[var(--accent)]/5 md:pl-6 md:rounded-r-lg md:p-4">
             <h4 className="text-xs font-semibold uppercase tracking-wide text-[var(--foreground)]">Connect</h4>
             <div className="flex items-center gap-3">
               {socialLinks.map((link) => (
@@ -151,7 +151,7 @@ export function SiteFooter() {
                   href={link.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="group flex h-9 w-9 md:h-8 md:w-8 items-center justify-center rounded-lg border border-[var(--color-border)] bg-[var(--surface-raised)] text-[var(--color-muted)] transition-all hover:border-[var(--accent)] hover:bg-[var(--accent)]/10 hover:text-[var(--accent-strong)] hover:scale-110"
+                  className="group flex h-9 w-9 md:h-8 md:w-8 items-center justify-center rounded-lg border border-[var(--accent)]/20 bg-[var(--accent)]/5 text-[var(--color-muted)] transition-all hover:border-[var(--accent)]/60 hover:bg-[var(--accent)]/15 hover:text-[var(--accent-strong)] hover:scale-110 hover:shadow-md hover:shadow-[var(--accent)]/10"
                   aria-label={link.label}
                 >
                   {link.label === "LinkedIn" && (
@@ -176,7 +176,7 @@ export function SiteFooter() {
               href="/assets/myCV.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="group mt-1 inline-flex items-center justify-center gap-2 rounded-lg border border-[var(--accent)] bg-[var(--accent)]/10 px-4 py-2 text-xs font-semibold text-[var(--accent)] transition-all hover:bg-[var(--accent)] hover:text-black hover:shadow-[0_0_20px_rgba(51,255,180,0.3)] active:scale-95"
+              className="group mt-1 inline-flex items-center justify-center gap-2 rounded-lg border border-[var(--accent)] bg-[var(--accent)]/10 px-4 py-2 text-xs font-semibold text-[var(--accent)] transition-all hover:bg-[var(--accent)] hover:text-white hover:shadow-lg hover:shadow-[var(--accent)]/25 active:scale-95"
             >
               <svg className="h-3.5 w-3.5 transition-transform group-hover:animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
