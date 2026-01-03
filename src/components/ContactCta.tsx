@@ -5,6 +5,7 @@ import { Mail, Linkedin, Github, Sparkles, Clock } from "lucide-react";
 import { socialLinks } from "@/data/stats";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { Typewriter } from "@/components/animations/Typewriter";
 
 const iconMap = {
   linkedin: Linkedin,
@@ -15,6 +16,7 @@ const iconMap = {
 export function ContactCta() {
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
   const [hoveredSocial, setHoveredSocial] = useState<string | null>(null);
+  const [isInView, setIsInView] = useState(false);
 
   return (
     <motion.section
@@ -22,6 +24,7 @@ export function ContactCta() {
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
+      onViewportEnter={() => setIsInView(true)}
       transition={{ duration: 0.6 }}
       className="group relative overflow-hidden rounded-3xl border border-[var(--color-border)]/40 bg-gradient-to-br from-[var(--accent)]/8 via-[var(--surface)] to-[var(--surface-raised)] px-6 py-12 shadow-[0_8px_32px_rgba(12,94,74,0.12)] backdrop-blur-xl md:rounded-[40px] md:px-10 md:py-16"
     >
@@ -57,7 +60,7 @@ export function ContactCta() {
         >
           <Sparkles className="h-3.5 w-3.5 text-[var(--accent)]" />
           <p className="text-xs font-medium uppercase tracking-[0.2em] text-[var(--accent)] md:text-sm">
-            Let's Connect
+            {isInView ? <Typewriter text="Let's Connect" delay={50} /> : "Let's Connect"}
           </p>
         </motion.div>
 
@@ -97,7 +100,9 @@ export function ContactCta() {
         >
           <Clock className="h-4 w-4 text-[var(--accent)]" />
           <span className="text-sm text-[var(--muted)]">
-            <span className="font-semibold text-[var(--foreground)]">12-hour</span> response time
+            <span className="font-semibold text-[var(--foreground)]">
+              {isInView ? <Typewriter text="12-hour" delay={50} /> : "12-hour"}
+            </span> response time
           </span>
         </motion.div>
 
