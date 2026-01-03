@@ -29,7 +29,6 @@ import {
 } from "lucide-react";
 import { useGitHubTimeline } from "@/hooks/useGitHub";
 import { useMemo, useState, useRef, useEffect, memo } from "react";
-import { throttle } from "@/lib/utils";
 
 // Badge configuration with icons and colors
 const badgeConfig: Record<string, { icon: any; label: string; color: string }> = {
@@ -80,7 +79,7 @@ function TimelineItem({
       viewport={{ once: true, margin: "-50px" }}
       onViewportEnter={() => setIsInView(true)}
       transition={{ delay: index * 0.05, duration: 0.6 }}
-      className="group relative flex min-w-[280px] flex-col md:min-w-[320px] flex-shrink-0 snap-center"
+      className="group relative flex w-[320px] flex-col flex-shrink-0 snap-center"
     >
       {/* Timeline Node with Badge Icon or Emoji */}
       <div className="relative mb-4 flex items-center">
@@ -129,7 +128,7 @@ function TimelineItem({
           y: -4,
           transition: { type: "spring", stiffness: 400, damping: 15 }
         }}
-        className="group/card relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 shadow-[0_8px_32px_rgba(0,0,0,0.3)] backdrop-blur-xl transition-all duration-300 hover:border-[var(--accent)]/30 hover:bg-white/8 hover:shadow-[0_12px_40px_rgba(51,255,180,0.1)]"
+        className="group/card relative flex h-[300px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 shadow-[0_8px_32px_rgba(0,0,0,0.3)] backdrop-blur-xl transition-all duration-300 hover:border-[var(--accent)]/30 hover:bg-white/8 hover:shadow-[0_12px_40px_rgba(51,255,180,0.1)]"
       >
         {/* Glass Reflection Shimmer Effect */}
         <motion.div
@@ -181,26 +180,21 @@ function TimelineItem({
         </p>
 
         {/* Description */}
-        <p className="relative z-10 mb-4 flex-1 text-xs leading-relaxed text-white/70">
+        <p className="relative z-10 mb-auto line-clamp-3 text-xs leading-relaxed text-white/70 pb-14">
           {entry.description}
         </p>
 
-        {/* Technologies */}
+        {/* Technologies - Positioned at bottom */}
         {entry.technologies && entry.technologies.length > 0 && (
-          <div className="relative z-10 flex flex-wrap gap-2">
-            {entry.technologies.slice(0, 3).map((tech) => (
+          <div className="absolute bottom-5 left-5 right-5 z-10 flex flex-wrap gap-1.5">
+            {entry.technologies.map((tech) => (
               <span
                 key={tech}
-                className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-xs text-white/80 backdrop-blur-sm transition-all hover:border-[var(--accent)]/30 hover:bg-white/10 hover:text-white"
+                className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[10px] text-white/80 backdrop-blur-sm transition-all hover:border-[var(--accent)]/30 hover:bg-white/10 hover:text-white"
               >
                 {tech}
               </span>
             ))}
-            {entry.technologies.length > 3 && (
-              <span className="px-2 py-1 text-xs text-white/50">
-                +{entry.technologies.length - 3}
-              </span>
-            )}
           </div>
         )}
         
@@ -224,7 +218,7 @@ export function Timeline() {
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
 
-  // Handle edge detection for pulsing hints
+  // Handle edge detection for pulsing hints - using passive listener for better performance
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
@@ -238,15 +232,14 @@ export function Timeline() {
       setCanScrollRight(scrollLeft < maxScroll - 10);
     };
 
-    // Throttle scroll events to 100ms for performance
-    const throttledScroll = throttle(handleScroll, 100);
-    container.addEventListener('scroll', throttledScroll);
+    // Use passive listener for better scroll performance
+    container.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll(); // Initial check
 
-    return () => container.removeEventListener('scroll', throttledScroll);
+    return () => container.removeEventListener('scroll', handleScroll);
   }, [isLoading, timelineRepos]);
 
-  // Mouse drag handlers
+  // Mouse drag handlers with RAF for smooth scrolling
   const handleMouseDown = (e: React.MouseEvent) => {
     const container = scrollContainerRef.current;
     if (!container) return;
@@ -256,6 +249,8 @@ export function Timeline() {
     setScrollLeft(container.scrollLeft);
     container.style.cursor = 'grabbing';
     container.style.userSelect = 'none';
+    // Disable scroll-snap during drag for smooth scrolling
+    container.style.scrollSnapType = 'none';
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -266,8 +261,12 @@ export function Timeline() {
     
     e.preventDefault();
     const x = e.pageX - container.offsetLeft;
-    const walk = (x - startX) * 2; // Multiply for faster scroll
-    container.scrollLeft = scrollLeft - walk;
+    const walk = (x - startX) * 2.5; // Faster scroll multiplier
+    
+    // Use RAF for smooth 60fps updates
+    requestAnimationFrame(() => {
+      container.scrollLeft = scrollLeft - walk;
+    });
   };
 
   const handleMouseUp = () => {
@@ -277,6 +276,8 @@ export function Timeline() {
     setIsDragging(false);
     container.style.cursor = 'grab';
     container.style.userSelect = 'auto';
+    // Re-enable scroll-snap after drag
+    container.style.scrollSnapType = 'x mandatory';
   };
 
   const handleMouseLeave = () => {
@@ -287,6 +288,8 @@ export function Timeline() {
       setIsDragging(false);
       container.style.cursor = 'grab';
       container.style.userSelect = 'auto';
+      // Re-enable scroll-snap after drag
+      container.style.scrollSnapType = 'x mandatory';
     }
   };
 
@@ -317,9 +320,7 @@ export function Timeline() {
           organization: "GitHub Project",
           description: repo.description || "Open source project",
           type: repo.type,
-          technologies: repo.languages
-            .filter(lang => lang && lang.toLowerCase() !== 'unknown')
-            .slice(0, 4),
+          technologies: repo.languages.filter(lang => lang && lang.toLowerCase() !== 'unknown'),
           icon: icon,
           url: repo.url,
         },
@@ -403,10 +404,10 @@ export function Timeline() {
                 {[...Array(5)].map((_, i) => (
                   <div 
                     key={i}
-                    className="min-w-[280px] md:min-w-[320px] flex-shrink-0 snap-center animate-pulse"
+                    className="w-[320px] flex-shrink-0 snap-center animate-pulse"
                   >
                     <div className="mb-4 h-12 w-12 rounded-full bg-[var(--surface)]" />
-                    <div className="h-48 rounded-xl bg-[var(--surface)]/50" />
+                    <div className="h-[300px] rounded-2xl bg-[var(--surface)]/50" />
                   </div>
                 ))}
               </div>
