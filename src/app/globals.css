@@ -35,43 +35,43 @@
   --contrib-level-4: #39d353;
 }
 
-/* Light Theme */
+/* Light Theme - Soft, warm, easy on the eyes */
 :root.light {
   color-scheme: light;
   
-  /* Base Colors */
-  --background: #fafbfa;
-  --foreground: #1a2420;
-  --muted: #647067;
+  /* Base Colors - Warm paper-like tone, not pure white */
+  --background: #f0f2f1;
+  --foreground: #2d3a34;
+  --muted: #5a6860;
   
-  /* Surface Layers */
-  --surface: #ffffff;
-  --surface-raised: #f0f4f2;
+  /* Surface Layers - Cream/sage tint */
+  --surface: #f7f9f8;
+  --surface-raised: #eaedeb;
   
-  /* Accent Colors */
-  --accent: #0e6e55;
-  --accent-strong: #0a5a47;
+  /* Accent Colors - Slightly muted for light bg */
+  --accent: #0c5e4a;
+  --accent-strong: #084536;
   
-  /* Borders */
-  --border: #d1dbd4;
+  /* Borders - Subtle, warm gray-green */
+  --border: #cdd5d0;
   
-  /* Shadows & Effects */
-  --glow: 0 20px 60px rgba(14, 110, 85, 0.12);
+  /* Shadows & Effects - Very subtle */
+  --glow: 0 20px 60px rgba(14, 110, 85, 0.06);
   
   /* RGB values */
-  --color-accent-rgb: 14, 110, 85;
+  --color-accent-rgb: 12, 94, 74;
   
-  /* Gradients */
-  --background-gradient: radial-gradient(circle at top, #f0f4f2 0%, #ffffff 55%, #fafbfa 100%);
-  --hero-glow-gradient: linear-gradient(to bottom, rgba(14, 110, 85, 0.08) 0%, rgba(51, 255, 180, 0.05) 50%, transparent 100%);
+  /* Gradients - Warm, subtle, no harsh whites */
+  --background-gradient: radial-gradient(circle at top, #e8ebe9 0%, #f0f2f1 55%, #f0f2f1 100%);
+  --hero-glow-gradient: linear-gradient(to bottom, rgba(12, 94, 74, 0.04) 0%, rgba(51, 255, 180, 0.015) 50%, transparent 100%);
   
   /* Component-specific */
-  --toggle-bg: rgba(100, 112, 103, 0.15);
-  --toggle-bg-hover: rgba(100, 112, 103, 0.25);
+  --toggle-bg: rgba(90, 104, 96, 0.1);
+  --toggle-bg-hover: rgba(90, 104, 96, 0.15);
   --button-text: #ffffff;
   
-  /* GitHub Contribution Colors (Light Theme - adjusted for visibility) */
-  --contrib-none: var(--surface);
+  /* GitHub Contribution Colors (Light Theme) */
+  --contrib-none: #e8ebe9;
   --contrib-level-1: #9be9a8;
   --contrib-level-2: #40c463;
   --contrib-level-3: #30a14e;

@@ -146,8 +146,8 @@ export function PremiumSkillsMarquee({ items }: { items: string[] }) {
   return (
     <div className="relative w-full overflow-hidden py-4 pb-20">
       {/* Edge gradients */}
-      <div className="pointer-events-none absolute left-0 top-0 z-30 h-full w-24 bg-gradient-to-r from-[#0a0a0a] to-transparent" />
-      <div className="pointer-events-none absolute right-0 top-0 z-30 h-full w-24 bg-gradient-to-l from-[#0a0a0a] to-transparent" />
+      <div className="pointer-events-none absolute left-0 top-0 z-30 h-full w-24 bg-gradient-to-r from-[var(--background)] to-transparent" />
+      <div className="pointer-events-none absolute right-0 top-0 z-30 h-full w-24 bg-gradient-to-l from-[var(--background)] to-transparent" />
 
       {/* Scrolling container with drag */}
       <motion.div

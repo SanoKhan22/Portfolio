@@ -55,7 +55,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     // Update meta theme-color for mobile browsers
     const metaThemeColor = document.querySelector('meta[name="theme-color"]');
     if (metaThemeColor) {
-      const bgColor = newTheme === 'light' ? '#fafbfa' : '#030503';
+      const bgColor = newTheme === 'light' ? '#f0f2f1' : '#030503';
       metaThemeColor.setAttribute('content', bgColor);
     }
   };

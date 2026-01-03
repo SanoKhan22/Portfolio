@@ -204,7 +204,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15, duration: 0.6 }}
-            className="text-base text-white/70 md:text-lg"
+            className="text-base text-[var(--muted)] md:text-lg"
           >
             Computer Science Student @{" "}
             <a
@@ -223,7 +223,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="text-base leading-relaxed text-white/80 sm:text-lg md:text-xl max-w-xl"
+          className="text-base leading-relaxed text-[var(--muted)] sm:text-lg md:text-xl max-w-xl"
         >
           <span className="text-[var(--accent)]">"</span>I fix problems with code. Sometimes I create new problems with code. Then I fix those too.<span className="text-[var(--accent)]">"</span>
         </motion.h2>
