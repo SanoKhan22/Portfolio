@@ -9,9 +9,10 @@ interface TypewriterProps {
     className?: string;
     delay?: number;
     speed?: number;
+    showCursor?: boolean;
 }
 
-export function Typewriter({ text, className = "", delay = 0, speed }: TypewriterProps) {
+export function Typewriter({ text, className = "", delay = 0, speed, showCursor = false }: TypewriterProps) {
     const [displayedText, setDisplayedText] = useState("");
     const reducedMotion = shouldReduceMotion();
     const mobile = isMobile();
@@ -49,13 +50,15 @@ export function Typewriter({ text, className = "", delay = 0, speed }: Typewrite
     return (
         <span className={className}>
             {displayedText}
-            <motion.span
-                animate={{ opacity: [0, 1, 0] }}
-                transition={{ duration: 0.8, repeat: Infinity }}
-                className="inline-block"
-            >
-                |
-            </motion.span>
+            {showCursor && (
+                <motion.span
+                    animate={{ opacity: [0, 1, 0] }}
+                    transition={{ duration: 0.8, repeat: Infinity }}
+                    className="inline-block"
+                >
+                    |
+                </motion.span>
+            )}
         </span>
     );
 }

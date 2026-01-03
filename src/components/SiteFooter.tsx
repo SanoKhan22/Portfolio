@@ -10,7 +10,6 @@ const quickLinks = [
   { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
   { label: "Timeline", href: "#timeline" },
-  { label: "Now", href: "#now" },
   { label: "Contact", href: "#contact" },
 ];
 

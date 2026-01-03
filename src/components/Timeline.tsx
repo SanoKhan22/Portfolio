@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { timeline } from "@/data/timeline";
 import type { TimelineEntry } from "@/data/timeline";
 import { Terminal, Code2, ExternalLink } from "lucide-react";
+import { Typewriter } from "@/components/animations/Typewriter";
 import { 
   SiAndroid, 
   SiApple, 
@@ -59,6 +60,7 @@ function TimelineItem({
   badge?: string;
 }) {
   const [showTooltip, setShowTooltip] = useState(false);
+  const [isInView, setIsInView] = useState(false);
   
   const typeColors = {
     work: "#10B981",
@@ -75,6 +77,7 @@ function TimelineItem({
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
+      onViewportEnter={() => setIsInView(true)}
       transition={{ delay: index * 0.05, duration: 0.6 }}
       className="group relative flex min-w-[280px] flex-col md:min-w-[320px]"
     >
@@ -121,59 +124,87 @@ function TimelineItem({
 
       {/* Content Card */}
       <motion.div
-        whileHover={{ y: -4 }}
-        className="flex h-full flex-col rounded-xl border border-[var(--color-border)] bg-[var(--surface-raised)]/50 p-4 backdrop-blur transition-all hover:border-[var(--accent)]/30 hover:shadow-lg"
+        whileHover={{ 
+          y: -4,
+          transition: { type: "spring", stiffness: 400, damping: 15 }
+        }}
+        className="group/card relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 shadow-[0_8px_32px_rgba(0,0,0,0.3)] backdrop-blur-xl transition-all duration-300 hover:border-[var(--accent)]/30 hover:bg-white/8 hover:shadow-[0_12px_40px_rgba(51,255,180,0.1)]"
       >
+        {/* Glass Reflection Shimmer Effect */}
+        <motion.div
+          className="pointer-events-none absolute inset-0 opacity-0 group-hover/card:opacity-100"
+          initial={{ x: "-100%" }}
+          whileHover={{
+            x: "100%",
+            transition: { duration: 0.6, ease: "easeInOut" }
+          }}
+        >
+          <div className="h-full w-1/3 bg-gradient-to-r from-transparent via-white/5 to-transparent blur-sm" />
+        </motion.div>
+        
         {/* Header */}
-        <div className="mb-3 flex items-center justify-between border-b border-[var(--color-border)]/50 pb-2">
-          <span className="font-mono text-xs text-[var(--color-muted)]">
-            {entry.date}
-          </span>
+        <div className="relative z-10 mb-3 flex items-center justify-between border-b border-white/10 pb-3">
+          {isInView ? (
+            <Typewriter 
+              text={entry.date}
+              className="font-mono text-xs font-medium text-[var(--accent)]/90"
+              delay={0}
+              speed={30}
+              showCursor={false}
+            />
+          ) : (
+            <span className="font-mono text-xs font-medium text-[var(--accent)]/90 opacity-0">
+              {entry.date}
+            </span>
+          )}
           
           {isGitHub && entry.url && (
             <a
               href={entry.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[var(--color-muted)] transition-colors hover:text-[var(--accent)]"
+              className="group/link text-white/60 transition-all hover:scale-110 hover:text-[var(--accent)]"
               onClick={(e) => e.stopPropagation()}
             >
-              <ExternalLink size={14} />
+              <ExternalLink size={22} className="transition-all group-hover/link:rotate-12 group-hover/link:drop-shadow-[0_0_8px_rgba(51,255,180,0.5)]" />
             </a>
           )}
         </div>
 
         {/* Title */}
-        <h3 className="mb-2 font-display text-base font-bold text-white">
+        <h3 className="relative z-10 mb-2 font-display text-base font-bold leading-tight text-white">
           {entry.title}
         </h3>
-        <p className="mb-3 font-mono text-xs text-[var(--color-muted)]">
+        <p className="relative z-10 mb-3 font-mono text-xs text-white/50">
           {entry.organization}
         </p>
 
         {/* Description */}
-        <p className="mb-3 flex-1 text-xs leading-relaxed text-white/70">
+        <p className="relative z-10 mb-4 flex-1 text-xs leading-relaxed text-white/70">
           {entry.description}
         </p>
 
         {/* Technologies */}
         {entry.technologies && entry.technologies.length > 0 && (
-          <div className="flex flex-wrap gap-1.5">
+          <div className="relative z-10 flex flex-wrap gap-2">
             {entry.technologies.slice(0, 3).map((tech) => (
               <span
                 key={tech}
-                className="rounded-md border border-[var(--color-border)]/70 bg-[var(--surface)]/50 px-2 py-0.5 font-mono text-xs text-[var(--color-muted)]"
+                className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-xs text-white/80 backdrop-blur-sm transition-all hover:border-[var(--accent)]/30 hover:bg-white/10 hover:text-white"
               >
                 {tech}
               </span>
             ))}
             {entry.technologies.length > 3 && (
-              <span className="px-2 py-0.5 text-xs text-[var(--color-muted)]">
+              <span className="px-2 py-1 text-xs text-white/50">
                 +{entry.technologies.length - 3}
               </span>
             )}
           </div>
         )}
+        
+        {/* Subtle inner glow */}
+        <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-white/5 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover/card:opacity-100" />
       </motion.div>
     </motion.div>
   );
@@ -185,6 +216,9 @@ export function Timeline() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
 
   // Handle edge detection for pulsing hints
   useEffect(() => {
@@ -205,6 +239,50 @@ export function Timeline() {
 
     return () => container.removeEventListener('scroll', handleScroll);
   }, [isLoading, timelineRepos]);
+
+  // Mouse drag handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    
+    setIsDragging(true);
+    setStartX(e.pageX - container.offsetLeft);
+    setScrollLeft(container.scrollLeft);
+    container.style.cursor = 'grabbing';
+    container.style.userSelect = 'none';
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    
+    e.preventDefault();
+    const x = e.pageX - container.offsetLeft;
+    const walk = (x - startX) * 2; // Multiply for faster scroll
+    container.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleMouseUp = () => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    
+    setIsDragging(false);
+    container.style.cursor = 'grab';
+    container.style.userSelect = 'auto';
+  };
+
+  const handleMouseLeave = () => {
+    if (isDragging) {
+      const container = scrollContainerRef.current;
+      if (!container) return;
+      
+      setIsDragging(false);
+      container.style.cursor = 'grab';
+      container.style.userSelect = 'auto';
+    }
+  };
 
   // Merge GitHub repos with demo timeline data
   const combinedTimeline = useMemo(() => {
@@ -304,7 +382,12 @@ export function Timeline() {
           {/* Scrollable container */}
           <div 
             ref={scrollContainerRef}
-            className="overflow-x-auto pb-8 scrollbar-hide"
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseLeave}
+            className="overflow-x-auto overflow-y-hidden pb-8 scrollbar-hide cursor-grab active:cursor-grabbing"
+            style={{ scrollBehavior: isDragging ? 'auto' : 'smooth' }}
           >
             {isLoading ? (
               <div className="flex gap-6 px-4 md:gap-8 md:px-8">

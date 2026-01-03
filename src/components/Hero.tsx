@@ -73,11 +73,12 @@ export function Hero() {
   const { scrollY } = useScroll();
   const { timelineRepos } = useGitHubTimeline();
 
-  // Enhanced parallax with multiple layers
-  const yBackground = useTransform(scrollY, [0, 500], [0, 150]);
-  const yPortrait = useTransform(scrollY, [0, 500], [0, 80]);
-  const yBadges = useTransform(scrollY, [0, 500], [0, 60]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0.7]);
+  // Enhanced multi-layer parallax with smoother motion
+  const yBackground = useTransform(scrollY, [0, 600], [0, 180]);
+  const yPortrait = useTransform(scrollY, [0, 500], [0, 100]);
+  const yBadges = useTransform(scrollY, [0, 400], [0, 40]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0.6]);
+  const scale = useTransform(scrollY, [0, 300], [1, 0.95]);
 
   // Generate dynamic tech badges from GitHub repos
   const dynamicBadges = (() => {
@@ -158,7 +159,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative grid gap-8 pb-12 pt-20 md:gap-12 md:pb-16 md:pt-28 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,0.8fr)]"
+      className="relative grid gap-8 pb-12 pt-20 md:gap-12 md:pb-16 md:pt-28 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] px-4 sm:px-6 lg:px-8"
     >
       {/* Animated background blobs */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -169,14 +170,14 @@ export function Hero() {
           colors={["rgba(51, 255, 180, 0.08)", "rgba(14, 110, 85, 0.12)"]}
         />
       </div>
-      <div className="flex flex-col gap-6 md:gap-8">
+      <div className="flex flex-col gap-6 md:gap-8 px-4 sm:px-6 lg:px-0 max-w-3xl">
         <div className="space-y-3 md:space-y-4">
           {/* Name - Large and Prominent */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="font-display text-6xl font-bold tracking-tight text-white sm:text-7xl md:text-8xl lg:text-9xl"
+            className="font-display text-5xl font-bold tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl"
           >
             <span className="bg-gradient-to-r from-white via-white to-[var(--accent-strong)] bg-clip-text text-transparent">
               Ehsanullah Sano
@@ -188,7 +189,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.6 }}
-            className="text-xl font-medium tracking-wide text-[var(--accent)] md:text-2xl lg:text-3xl"
+            className="text-lg font-medium tracking-wide text-[var(--accent)] md:text-xl lg:text-2xl"
           >
             Software Engineer & Startup Builder
           </motion.p>
@@ -199,7 +200,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl md:text-2xl"
+          className="text-base leading-relaxed text-white/80 sm:text-lg md:text-xl max-w-xl"
         >
           <span className="text-[var(--accent)]">"</span>I fix problems with code. Sometimes I create new problems with code. Then I fix those too.<span className="text-[var(--accent)]">"</span>
         </motion.h2>
@@ -232,19 +233,20 @@ export function Hero() {
         </motion.div>
       </div>
 
-      {/* 3D Perspective Container - Creates depth space */}
+      {/* 3D Perspective Container - Enhanced depth with better perspective */}
       <motion.div
         className="relative isolate flex items-center justify-center lg:justify-end"
         style={{
           y: yBackground,
           opacity,
-          perspective: isMobile ? "none" : "1400px",
-          perspectiveOrigin: "center center"
+          scale,
+          perspective: isMobile ? "none" : "1800px",
+          perspectiveOrigin: "50% 50%"
         }}
       >
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[rgba(14,110,85,0.2)]/40 to-transparent blur-3xl" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[rgba(14,110,85,0.25)]/50 via-[rgba(51,255,180,0.1)]/30 to-transparent blur-3xl" />
 
-        {/* Card Frame - Recedes slightly in 3D space */}
+        {/* Enhanced Card Frame with depth and 3D tilt */}
         <motion.div
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => {
@@ -253,23 +255,33 @@ export function Hero() {
           }}
           onMouseMove={handleMouseMove}
           style={{
-            rotateX: isHovered && !isMobile ? mousePosition.y * 6 : 0,
-            rotateY: isHovered && !isMobile ? mousePosition.x * 6 : 0,
+            rotateX: isHovered && !isMobile ? mousePosition.y * 8 : 0,
+            rotateY: isHovered && !isMobile ? mousePosition.x * 8 : 0,
             transformStyle: "preserve-3d",
-            // Card recedes back in 3D space (desktop only)
-            transform: isMobile ? "none" : "translateZ(-30px)",
+            // Card recedes in 3D space with dynamic shadow
+            transform: isMobile ? "none" : "translateZ(-40px)",
           }}
           animate={{
-            y: prefersReducedMotion ? 0 : [0, -10, 0],
+            y: prefersReducedMotion ? 0 : [0, -12, 0],
           }}
           transition={{
             y: {
-              duration: 4,
+              duration: 5,
               repeat: Infinity,
               ease: "easeInOut",
             },
+            rotateX: {
+              type: "spring",
+              stiffness: 100,
+              damping: 20,
+            },
+            rotateY: {
+              type: "spring",
+              stiffness: 100,
+              damping: 20,
+            },
           }}
-          className="relative h-[280px] w-[240px] rounded-[24px] border border-[var(--color-border)] bg-[var(--surface)]/60 p-3 shadow-[var(--shadow-soft)] backdrop-blur sm:h-[360px] sm:w-[300px] sm:rounded-[28px] sm:p-4 md:h-[420px] md:w-[360px] md:rounded-[32px] transition-shadow duration-300 overflow-visible"
+          className="relative h-[280px] w-[240px] rounded-[24px] border border-[var(--color-border)] bg-[var(--surface)]/70 p-3 shadow-2xl backdrop-blur-md sm:h-[360px] sm:w-[300px] sm:rounded-[28px] sm:p-4 md:h-[420px] md:w-[360px] md:rounded-[32px] transition-all duration-300 overflow-visible hover:shadow-[0_25px_60px_-15px_rgba(51,255,180,0.3)]"
         >
           {/* Enhanced pixel grid with bounce and rotation */}
           <motion.div
@@ -305,23 +317,24 @@ export function Hero() {
             ))}
           </motion.div>
 
-          {/* Portrait - Pops forward in 3D space with parallax */}
+          {/* Portrait - Enhanced 3D pop-out with improved parallax and glow */}
           <motion.div
             initial={{ scale: prefersReducedMotion ? 1 : 0.92, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: prefersReducedMotion ? 0 : 0.65, duration: 0.6 }}
             whileHover={{
-              scale: isMobile ? 1.02 : 1.08,
-              boxShadow: "0 0 50px rgba(51, 255, 180, 0.4)",
-              rotateY: isMobile ? 0 : 2,
+              scale: isMobile ? 1.02 : 1.1,
+              boxShadow: "0 0 60px rgba(51, 255, 180, 0.5), 0 30px 80px rgba(0, 0, 0, 0.8)",
+              rotateY: isMobile ? 0 : 3,
+              rotateX: isMobile ? 0 : -1,
             }}
             style={{
-              // Portrait extends forward in 3D space with parallax (desktop only)
-              transform: isMobile ? "none" : "translateZ(80px) scale(1.14)",
+              // Portrait dramatically extends forward in 3D space
+              transform: isMobile ? "none" : "translateZ(100px) scale(1.18)",
               y: yPortrait,
               zIndex: 10,
-              // Enhanced shadow casting
-              filter: isMobile ? "none" : "drop-shadow(0 30px 45px rgba(0, 0, 0, 0.6))",
+              // Dramatic shadow with glow
+              filter: isMobile ? "none" : "drop-shadow(0 35px 55px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 25px rgba(51, 255, 180, 0.2))",
             }}
             className="absolute inset-3 overflow-visible rounded-[20px] sm:inset-4 sm:rounded-[24px] md:inset-2 md:rounded-[28px] transition-all duration-300"
           >
@@ -334,31 +347,35 @@ export function Hero() {
                 className="object-cover"
                 priority
               />
-              {/* Glow overlay on hover */}
+              {/* Enhanced glow overlay with pulsing effect */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-[rgba(51,255,180,0.15)] to-transparent pointer-events-none"
+                className="absolute inset-0 bg-gradient-to-br from-[rgba(51,255,180,0.2)] via-[rgba(51,255,180,0.1)] to-transparent pointer-events-none"
                 animate={{
-                  opacity: isHovered ? 1 : 0,
+                  opacity: isHovered ? [0.8, 1, 0.8] : 0,
                 }}
-                transition={{ duration: 0.3 }}
+                transition={{ 
+                  duration: isHovered ? 2 : 0.3,
+                  repeat: isHovered ? Infinity : 0,
+                  ease: "easeInOut"
+                }}
               />
 
-              {/* Edge highlight - emphasizes the "breaking out" effect */}
+              {/* Edge highlight - enhanced "breaking out" effect */}
               {!isMobile && (
                 <motion.div
                   className="absolute inset-0 rounded-[inherit] pointer-events-none"
                   animate={{
                     boxShadow: isHovered
-                      ? "0 0 30px rgba(51, 255, 180, 0.4), inset 0 0 20px rgba(51, 255, 180, 0.1)"
-                      : "0 0 15px rgba(51, 255, 180, 0.2)",
+                      ? "0 0 40px rgba(51, 255, 180, 0.5), inset 0 0 30px rgba(51, 255, 180, 0.15)"
+                      : "0 0 20px rgba(51, 255, 180, 0.25)",
                   }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.4 }}
                 />
               )}
             </div>
           </motion.div>
 
-          {/* Dynamic Tech Badges - positioned in 3D space with parallax */}
+          {/* Dynamic Tech Badges - Enhanced floating effect in 3D space */}
           {!isMobile &&
             dynamicBadges.map((badge, index) => {
               const config = badgePositions[index];
@@ -368,30 +385,54 @@ export function Hero() {
                 <motion.div
                   key={badge.label}
                   initial={{ opacity: 0, y: 20, scale: 0.8 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  animate={{ 
+                    opacity: 1, 
+                    y: [0, -8, 0], 
+                    scale: 1,
+                  }}
                   transition={{ 
-                    delay: prefersReducedMotion ? 0 : 1 + index * 0.1,
-                    type: "spring",
-                    stiffness: 200,
-                    damping: 15
+                    opacity: { delay: prefersReducedMotion ? 0 : 1 + index * 0.1, duration: 0.5 },
+                    scale: { 
+                      delay: prefersReducedMotion ? 0 : 1 + index * 0.1,
+                      type: "spring",
+                      stiffness: 200,
+                      damping: 15
+                    },
+                    y: {
+                      delay: 1.5 + index * 0.15,
+                      duration: 3 + index * 0.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }
                   }}
                   whileHover={{
-                    scale: 1.1,
-                    y: -5,
-                    boxShadow: "0 10px 30px rgba(51, 255, 180, 0.3)",
+                    scale: 1.15,
+                    y: -8,
+                    rotateY: 5,
+                    boxShadow: "0 15px 40px rgba(51, 255, 180, 0.4), 0 5px 15px rgba(0, 0, 0, 0.3)",
                   }}
                   style={{
                     transform: `translateZ(${config.translateZ}px)`,
                     y: yBadges,
                     zIndex: config.zIndex,
+                    transformStyle: "preserve-3d",
                   }}
                   className={`absolute ${config.position} hidden md:block cursor-default`}
                 >
-                  <div className="group rounded-xl border border-[var(--color-border)] bg-[var(--surface-raised)]/80 px-3 py-2.5 text-xs text-white shadow-lg backdrop-blur-xl transition-all duration-300 hover:border-[var(--accent)]/50 sm:rounded-2xl sm:px-4 sm:py-3 sm:text-sm">
+                  <div className="group rounded-xl border border-[var(--color-border)] bg-[var(--surface-raised)]/90 px-3 py-2.5 text-xs text-white shadow-xl backdrop-blur-xl transition-all duration-300 hover:border-[var(--accent)]/60 hover:bg-[var(--surface-raised)] sm:rounded-2xl sm:px-4 sm:py-3 sm:text-sm">
                     <div className="flex items-center gap-2.5">
-                      <div className={`rounded-lg bg-[var(--surface)]/50 p-1.5 transition-transform group-hover:scale-110 ${badge.color}`}>
+                      <motion.div 
+                        className={`rounded-lg bg-[var(--surface)]/60 p-1.5 transition-all ${badge.color}`}
+                        whileHover={{ 
+                          scale: 1.15, 
+                          rotate: [0, -5, 5, 0],
+                        }}
+                        transition={{
+                          rotate: { duration: 0.5 }
+                        }}
+                      >
                         <IconComponent className="h-4 w-4 sm:h-5 sm:w-5" strokeWidth={2.5} />
-                      </div>
+                      </motion.div>
                       <div>
                         <p className="font-semibold">{badge.label}</p>
                         <p className="text-[10px] text-[var(--color-muted)] sm:text-xs">{badge.detail}</p>

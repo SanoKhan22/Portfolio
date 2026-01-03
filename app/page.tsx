@@ -7,7 +7,7 @@ import { Timeline } from "@/components/Timeline";
 import { EnhancedTestimonials } from "@/components/EnhancedTestimonials";
 import { ContactCta } from "@/components/ContactCta";
 import { SiteFooter } from "@/components/SiteFooter";
-import FloatingHeader from "@/components/FloatingHeader";
+import FloatingHeader from "@/components/headers/FloatingHeaderOption1";
 
 export default function Home() {
   return (

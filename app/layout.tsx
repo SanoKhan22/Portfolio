@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Instrument_Sans } from "next/font/google";
 import "./globals.css";
-import { ScrollProgress } from "@/components/animations/ScrollProgress";
 import { CursorFollower } from "@/components/animations/CursorFollower";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
@@ -56,7 +55,6 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${instrumentSans.variable} antialiased`}>
         <ThemeProvider>
-          <ScrollProgress />
           <CursorFollower />
           <div className="grain-overlay" />
           <div className="page-shell">{children}</div>
