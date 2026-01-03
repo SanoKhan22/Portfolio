@@ -8,6 +8,7 @@ import { BlobMorph } from "@/components/animations/BlobMorph";
 import { CodeRunner } from "@/components/animations/CodeRunner";
 import { useGitHubTimeline } from "@/hooks/useGitHub";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { throttle } from "@/lib/utils";
 import { Rocket, Layers, Code2 } from "lucide-react";
 
 // Optimize pixel animations: disable on mobile for better performance
