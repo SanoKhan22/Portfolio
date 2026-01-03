@@ -90,7 +90,7 @@ export function SiteFooter() {
           {/* Left Section: About & Status */}
           <div className="flex flex-col gap-3 transition-all hover:bg-[var(--surface-raised)]/30 md:pr-6 md:rounded-l-lg md:p-4">
             <div>
-              <h3 className="text-sm font-bold text-white">Ehsanullah Sano</h3>
+              <h3 className="text-sm font-bold text-[var(--foreground)]">Ehsanullah Sano</h3>
               <p className="text-xs text-[var(--accent-strong)]">Software Engineer</p>
             </div>
             <div className="flex flex-col gap-1.5 text-xs">
@@ -110,7 +110,7 @@ export function SiteFooter() {
               </div>
               <div className="flex items-center gap-2 pt-2 mt-2 border-t border-[var(--color-border)]/30">
                 <GraduationCap className="h-4 w-4 text-[var(--accent)] flex-shrink-0" />
-                <span className="text-white/60 text-xs">
+                <span className="text-[var(--muted)] text-xs">
                   Computer Science Student @{" "}
                   <a
                     href="https://www.elte.hu/"
@@ -127,7 +127,7 @@ export function SiteFooter() {
 
           {/* Center Section: Navigation */}
           <div className="flex flex-col gap-3 transition-all hover:bg-[var(--surface-raised)]/30 md:px-6 md:p-4">
-            <h4 className="text-xs font-semibold uppercase tracking-wide text-white">Navigate</h4>
+            <h4 className="text-xs font-semibold uppercase tracking-wide text-[var(--foreground)]">Navigate</h4>
             <nav className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
               {quickLinks.map((link) => (
                 <Link
@@ -143,7 +143,7 @@ export function SiteFooter() {
 
           {/* Right Section: Connect & CV */}
           <div className="flex flex-col gap-3 transition-all hover:bg-[var(--surface-raised)]/30 md:pl-6 md:rounded-r-lg md:p-4">
-            <h4 className="text-xs font-semibold uppercase tracking-wide text-white">Connect</h4>
+            <h4 className="text-xs font-semibold uppercase tracking-wide text-[var(--foreground)]">Connect</h4>
             <div className="flex items-center gap-3">
               {socialLinks.map((link) => (
                 <a
@@ -151,7 +151,7 @@ export function SiteFooter() {
                   href={link.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="group flex h-9 w-9 md:h-8 md:w-8 items-center justify-center rounded-lg border border-[var(--color-border)] bg-[var(--surface-raised)] text-[var(--color-muted)] transition-all hover:border-[var(--accent)] hover:bg-[var(--accent)]/10 hover:text-white hover:scale-110"
+                  className="group flex h-9 w-9 md:h-8 md:w-8 items-center justify-center rounded-lg border border-[var(--color-border)] bg-[var(--surface-raised)] text-[var(--color-muted)] transition-all hover:border-[var(--accent)] hover:bg-[var(--accent)]/10 hover:text-[var(--accent-strong)] hover:scale-110"
                   aria-label={link.label}
                 >
                   {link.label === "LinkedIn" && (

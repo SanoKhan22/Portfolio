@@ -50,20 +50,20 @@ function TestimonialCard({
       </div>
 
       {/* Quote */}
-      <p className="relative z-10 mb-6 text-sm leading-relaxed text-white/80">
+      <p className="relative z-10 mb-6 text-sm leading-relaxed text-[var(--muted)]">
         "{testimonial.quote}"
       </p>
 
       {/* Author Info */}
       <div className="relative z-10 flex items-center gap-3">
         {/* Avatar */}
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[var(--accent)] to-[var(--accent-strong)] font-display text-sm font-semibold text-white">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[var(--accent)] to-[var(--accent-strong)] font-display text-sm font-semibold text-[var(--button-text)]">
           {testimonial.avatar || testimonial.name.charAt(0)}
         </div>
 
         {/* Name & Title */}
         <div className="min-w-0 flex-1">
-          <p className="truncate font-semibold text-white">
+          <p className="truncate font-semibold text-[var(--foreground)]">
             {testimonial.name}
           </p>
           <p className="truncate text-xs text-[var(--color-muted)]">
@@ -99,7 +99,7 @@ export function TestimonialsSlider() {
           <p className="text-xs uppercase tracking-[0.2em] text-[var(--color-muted)] md:text-sm md:tracking-[0.3em]">
             Social proof
           </p>
-          <h2 className="mt-2 font-display text-2xl text-white md:mt-3 md:text-3xl">
+          <h2 className="mt-2 font-display text-2xl text-[var(--foreground)] md:mt-3 md:text-3xl">
             Trusted by founders, CTOs, and product leads
           </h2>
         </div>
@@ -201,20 +201,20 @@ export function TestimonialsSlider() {
             </div>
 
             {/* Quote */}
-            <p className="relative z-10 mb-6 text-sm leading-relaxed text-white/80">
+            <p className="relative z-10 mb-6 text-sm leading-relaxed text-[var(--muted)]">
               "{testimonial.quote}"
             </p>
 
             {/* Author Info */}
             <div className="relative z-10 flex items-center gap-3">
               {/* Avatar */}
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[var(--accent)] to-[var(--accent-strong)] font-display text-sm font-semibold text-white">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[var(--accent)] to-[var(--accent-strong)] font-display text-sm font-semibold text-[var(--button-text)]">
                 {testimonial.avatar || testimonial.name.charAt(0)}
               </div>
 
               {/* Name & Title */}
               <div className="min-w-0 flex-1">
-                <p className="truncate font-semibold text-white">
+                <p className="truncate font-semibold text-[var(--foreground)]">
                   {testimonial.name}
                 </p>
                 <p className="truncate text-xs text-[var(--color-muted)]">

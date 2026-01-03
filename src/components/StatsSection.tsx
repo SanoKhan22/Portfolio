@@ -129,7 +129,7 @@ export function StatsSection() {
                         {/* Terminal Output - Result */}
                         <div className="mb-3 flex items-baseline gap-2 font-mono text-sm">
                             <span className="text-green-400">✓</span>
-                            <span className="font-display text-4xl font-semibold text-white md:text-5xl lg:text-6xl">
+                            <span className="font-display text-4xl font-semibold text-[var(--foreground)] md:text-5xl lg:text-6xl">
                                 {stat.isGitHub && !isLoading ? (
                                     <>
                                         <Counter value={parseInt(stat.value) || 0} />
