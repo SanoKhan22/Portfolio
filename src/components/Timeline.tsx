@@ -453,12 +453,12 @@ export function Timeline() {
                     initial={{ scale: 0.4 }}
                     animate={{ 
                       scale: isActive ? 0.8 : 0.4,
-                      backgroundColor: isActive ? 'var(--accent)' : 'var(--accent)/25',
+                      backgroundColor: isActive ? 'var(--accent)' : 'var(--muted)',
                       opacity: 1
                     }}
-                    whileHover={{ scale: isActive ? 1 : 0.6, backgroundColor: isActive ? 'var(--accent)' : 'var(--accent)/40' }}
+                    whileHover={{ scale: isActive ? 1 : 0.6, backgroundColor: isActive ? 'var(--accent)' : 'var(--secondary)' }}
                     transition={{ duration: 0.3 }}
-                    className="h-1 w-1 rounded-full border border-[var(--accent)]/40 transition-all"
+                    className="h-1 w-1 rounded-full border border-[var(--muted)]/60 transition-all"
                     title={`Projects around ${representedIndex + 1}`}
                   />
                 );
