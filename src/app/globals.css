@@ -36,6 +36,35 @@
   --contrib-level-4: #39d353;
 }
 
+/* Cascading theme transition - components sync one by one */
+body.theme-transitioning * {
+  transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Staggered delays for cascading effect - syncs top to bottom */
+body.theme-transitioning header { transition-delay: 0s !important; }
+body.theme-transitioning main > section:nth-child(1),
+body.theme-transitioning main > section:nth-child(1) * { transition-delay: 0.15s !important; }
+body.theme-transitioning main > section:nth-child(2),
+body.theme-transitioning main > section:nth-child(2) * { transition-delay: 0.3s !important; }
+body.theme-transitioning main > section:nth-child(3),
+body.theme-transitioning main > section:nth-child(3) * { transition-delay: 0.45s !important; }
+body.theme-transitioning main > section:nth-child(4),
+body.theme-transitioning main > section:nth-child(4) * { transition-delay: 0.6s !important; }
+body.theme-transitioning main > section:nth-child(5),
+body.theme-transitioning main > section:nth-child(5) * { transition-delay: 0.75s !important; }
+body.theme-transitioning main > section:nth-child(6),
+body.theme-transitioning main > section:nth-child(6) * { transition-delay: 0.9s !important; }
+body.theme-transitioning main > section:nth-child(7),
+body.theme-transitioning main > section:nth-child(7) * { transition-delay: 1.05s !important; }
+body.theme-transitioning main > section:nth-child(8),
+body.theme-transitioning main > section:nth-child(8) * { transition-delay: 1.2s !important; }
+body.theme-transitioning footer,
+body.theme-transitioning footer * { transition-delay: 1.35s !important; }
+
 /* Light Theme - Soft, warm, easy on the eyes */
 :root.light {
   color-scheme: light;

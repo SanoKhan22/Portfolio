@@ -45,8 +45,8 @@ export default function FloatingHeader() {
         <motion.header
           className={`mx-auto max-w-7xl rounded-full transition-all duration-300 ${
             isScrolled
-              ? "bg-background/80 backdrop-blur-md shadow-lg border border-border/50"
-              : "bg-background/60 backdrop-blur-sm border border-border/30"
+              ? "bg-[var(--surface)]/90 backdrop-blur-md shadow-lg shadow-[var(--accent)]/8 border border-[var(--accent)]/20"
+              : "bg-[var(--surface)]/70 backdrop-blur-sm border border-[var(--color-border)]/30"
           }`}
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -57,7 +57,7 @@ export default function FloatingHeader() {
             {/* Logo */}
             <motion.button
               onClick={() => scrollToSection("home")}
-              className="text-xl font-bold font-display text-foreground hover:text-accent transition-colors"
+              className="text-xl font-bold font-display text-[var(--foreground)] hover:text-[var(--accent)] transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -70,12 +70,12 @@ export default function FloatingHeader() {
                 <motion.button
                   key={link.id}
                   onClick={() => scrollToSection(link.id)}
-                  className="text-sm font-medium text-muted hover:text-foreground transition-colors relative group"
+                  className="text-sm font-medium text-[var(--muted)] hover:text-[var(--foreground)] transition-colors relative group"
                   whileHover={{ y: -2 }}
                   whileTap={{ y: 0 }}
                 >
                   {link.label}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300" />
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--accent)] group-hover:w-full transition-all duration-300" />
                 </motion.button>
               ))}
               
@@ -87,7 +87,7 @@ export default function FloatingHeader() {
               <ThemeToggle />
               <motion.button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2 text-foreground"
+                className="p-2 text-[var(--foreground)]"
                 whileTap={{ scale: 0.9 }}
                 aria-label="Toggle menu"
               >
@@ -113,7 +113,7 @@ export default function FloatingHeader() {
         >
           {/* Backdrop */}
           <div
-            className="absolute inset-0 bg-background/95 backdrop-blur-lg"
+            className="absolute inset-0 bg-[var(--surface)]/95 backdrop-blur-lg border-b border-[var(--accent)]/10"
             onClick={() => setIsMobileMenuOpen(false)}
           />
 
@@ -128,7 +128,7 @@ export default function FloatingHeader() {
               <motion.button
                 key={link.id}
                 onClick={() => scrollToSection(link.id)}
-                className="text-2xl font-medium text-foreground hover:text-accent transition-colors"
+                className="text-2xl font-medium text-[var(--foreground)] hover:text-[var(--accent)] transition-colors"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.1 + index * 0.1 }}

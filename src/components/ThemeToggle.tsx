@@ -3,11 +3,12 @@
 import { useTheme } from "@/contexts/ThemeContext";
 import { motion } from "framer-motion";
 import { Moon, Sun } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -18,7 +19,16 @@ export default function ThemeToggle() {
     if ('vibrate' in navigator) {
       navigator.vibrate(10);
     }
-    toggleTheme();
+    
+    // Get button position for wave animation
+    if (buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+      toggleTheme(x, y);
+    } else {
+      toggleTheme();
+    }
   };
 
   if (!mounted) {
@@ -29,6 +39,7 @@ export default function ThemeToggle() {
 
   return (
     <motion.button
+      ref={buttonRef}
       onClick={handleToggle}
       className="w-12 h-12 rounded-full bg-[var(--toggle-bg)] hover:bg-[var(--toggle-bg-hover)] focus:ring-2 focus:ring-[var(--accent)] focus:outline-none flex items-center justify-center transition-colors duration-200 no-theme-transition"
       whileHover={{ scale: 1.05 }}

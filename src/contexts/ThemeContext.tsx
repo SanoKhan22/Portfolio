@@ -6,7 +6,7 @@ type Theme = "light" | "dark";
 
 interface ThemeContextType {
   theme: Theme;
-  toggleTheme: () => void;
+  toggleTheme: (x?: number, y?: number) => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -46,18 +46,28 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
-  const toggleTheme = () => {
+  const toggleTheme = (x?: number, y?: number) => {
     const newTheme = theme === "light" ? "dark" : "light";
+    
+    // Add transitioning class for cascading effect
+    document.body.classList.add('theme-transitioning');
+    
+    // Update theme
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
     document.documentElement.classList.toggle("light", newTheme === "light");
     
-    // Update meta theme-color for mobile browsers
+    // Update meta theme-color
     const metaThemeColor = document.querySelector('meta[name="theme-color"]');
     if (metaThemeColor) {
       const bgColor = newTheme === 'light' ? '#f0f2f1' : '#030503';
       metaThemeColor.setAttribute('content', bgColor);
     }
+    
+    // Remove transitioning class after all components have synced
+    setTimeout(() => {
+      document.body.classList.remove('theme-transitioning');
+    }, 2500);
   };
 
   return (
