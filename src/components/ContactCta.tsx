@@ -23,7 +23,7 @@ export function ContactCta() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.6 }}
-      className="group relative overflow-hidden rounded-3xl border border-[var(--color-border)]/50 bg-gradient-to-br from-[rgba(14,110,85,0.15)] via-black/80 to-black/60 px-6 py-12 shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl md:rounded-[40px] md:px-10 md:py-16"
+      className="group relative overflow-hidden rounded-3xl border border-[var(--color-border)]/40 bg-gradient-to-br from-[var(--accent)]/8 via-[var(--surface)] to-[var(--surface-raised)] px-6 py-12 shadow-[0_8px_32px_rgba(12,94,74,0.12)] backdrop-blur-xl md:rounded-[40px] md:px-10 md:py-16"
     >
       {/* Animated Gradient Border */}
       <div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-r from-[var(--accent)]/20 via-transparent to-[var(--accent)]/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100 md:rounded-[40px]" />
@@ -35,7 +35,7 @@ export function ContactCta() {
           opacity: [0.3, 0.5, 0.3],
         }}
         transition={{ duration: 4, repeat: Infinity }}
-        className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[var(--accent)]/20 blur-3xl"
+        className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[var(--accent)]/10 blur-3xl"
       />
       <motion.div
         animate={{
@@ -43,7 +43,7 @@ export function ContactCta() {
           opacity: [0.2, 0.4, 0.2],
         }}
         transition={{ duration: 5, repeat: Infinity, delay: 1 }}
-        className="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-purple-500/20 blur-3xl"
+        className="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-[var(--accent)]/8 blur-3xl"
       />
 
       <div className="relative z-10">
@@ -93,7 +93,7 @@ export function ContactCta() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
-          className="mt-4 inline-flex items-center gap-2 rounded-full bg-[var(--surface)]/50 px-4 py-2 backdrop-blur-sm"
+          className="mt-4 inline-flex items-center gap-2 rounded-full bg-[var(--accent)]/5 border border-[var(--accent)]/20 px-4 py-2 backdrop-blur-sm"
         >
           <Clock className="h-4 w-4 text-[var(--accent)]" />
           <span className="text-sm text-[var(--muted)]">
@@ -115,7 +115,7 @@ export function ContactCta() {
             target="_blank"
             onMouseEnter={() => setHoveredButton("call")}
             onMouseLeave={() => setHoveredButton(null)}
-            className="group/btn relative overflow-hidden rounded-full bg-gradient-to-r from-[var(--accent)] to-[var(--accent-strong)] px-8 py-4 text-base font-bold text-black shadow-lg transition-all duration-300 hover:shadow-xl active:scale-95 sm:px-10"
+            className="group/btn relative overflow-hidden rounded-full bg-gradient-to-r from-[var(--accent)] to-[var(--accent-strong)] px-8 py-4 text-base font-bold text-white shadow-lg shadow-[var(--accent)]/20 transition-all duration-300 hover:shadow-xl hover:shadow-[var(--accent)]/30 active:scale-95 sm:px-10"
           >
             <motion.div
               animate={{
@@ -132,7 +132,7 @@ export function ContactCta() {
             href="mailto:hey@sano.dev"
             onMouseEnter={() => setHoveredButton("email")}
             onMouseLeave={() => setHoveredButton(null)}
-            className="group/btn relative overflow-hidden rounded-full border-2 border-[var(--color-border)]/50 bg-[var(--surface)]/50 px-8 py-4 text-base font-bold text-[var(--foreground)] backdrop-blur-sm transition-all duration-300 hover:border-[var(--accent)]/50 hover:bg-[var(--surface-raised)]/80 active:scale-95 sm:px-10"
+            className="group/btn relative overflow-hidden rounded-full border-2 border-[var(--accent)]/30 bg-white/50 px-8 py-4 text-base font-bold text-[var(--foreground)] backdrop-blur-sm transition-all duration-300 hover:border-[var(--accent)]/60 hover:bg-white/80 active:scale-95 sm:px-10"
           >
             <motion.div
               animate={{
@@ -171,7 +171,7 @@ export function ContactCta() {
                   onMouseLeave={() => setHoveredSocial(null)}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="group/social relative overflow-hidden rounded-full border border-white/20 bg-white/5 px-5 py-3 backdrop-blur-sm transition-all duration-300 hover:border-[var(--accent)]/50 hover:bg-white/10"
+                  className="group/social relative overflow-hidden rounded-full border border-[var(--accent)]/20 bg-[var(--accent)]/5 px-5 py-3 backdrop-blur-sm transition-all duration-300 hover:border-[var(--accent)]/50 hover:bg-[var(--accent)]/10 hover:shadow-md hover:shadow-[var(--accent)]/10"
                 >
                   <motion.div
                     animate={{
