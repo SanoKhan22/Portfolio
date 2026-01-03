@@ -18,14 +18,14 @@ function TestimonialCard({ testimonial, index }: { testimonial: any; index: numb
       {/* Header with Avatar and Info */}
       <div className="mb-6 flex items-start gap-4">
         {/* Avatar */}
-        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[var(--accent)] to-[var(--accent-strong)] font-display text-lg font-semibold text-white shadow-md">
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[var(--accent)] to-[var(--accent-strong)] font-display text-lg font-semibold text-[var(--button-text)] shadow-md">
           {testimonial.avatar || testimonial.name.charAt(0)}
         </div>
 
         {/* Name and Title */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
-            <h3 className="font-semibold text-white text-base truncate">
+            <h3 className="font-semibold text-[var(--foreground)] text-base truncate">
               {testimonial.name}
             </h3>
             {testimonial.verified && (
@@ -52,7 +52,7 @@ function TestimonialCard({ testimonial, index }: { testimonial: any; index: numb
       </div>
 
       {/* Quote */}
-      <p className="relative text-[15px] leading-relaxed text-white/85 mb-6">
+      <p className="relative text-[15px] leading-relaxed text-[var(--muted)] mb-6">
         "{testimonial.quote}"
       </p>
 
@@ -61,7 +61,7 @@ function TestimonialCard({ testimonial, index }: { testimonial: any; index: numb
         <div className="flex items-center gap-2 pt-4 border-t border-[var(--color-border)]/30">
           <div className="flex items-center gap-1.5 text-xs text-[var(--color-muted)]">
             <CheckCircle2 className="h-3.5 w-3.5 text-[var(--accent-strong)]" />
-            <span>via <span className="font-medium text-white">{testimonial.source}</span></span>
+            <span>via <span className="font-medium text-[var(--foreground)]">{testimonial.source}</span></span>
           </div>
         </div>
       )}
@@ -111,7 +111,7 @@ export function EnhancedTestimonials() {
           <p className="text-xs uppercase tracking-[0.2em] text-[var(--color-muted)] md:text-sm md:tracking-[0.3em]">
             Social proof
           </p>
-          <h2 className="mt-2 font-display text-2xl text-white md:mt-3 md:text-3xl">
+          <h2 className="mt-2 font-display text-2xl text-[var(--foreground)] md:mt-3 md:text-3xl">
             Trusted by founders, CTOs, and product leads
           </h2>
         </div>
@@ -162,7 +162,7 @@ export function EnhancedTestimonials() {
             className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--surface)]/50 backdrop-blur-sm transition-all hover:border-[var(--accent)]/50 hover:bg-[var(--accent)]/10"
             aria-label="Previous testimonials"
           >
-            <ChevronLeft className="h-5 w-5 text-white" />
+            <ChevronLeft className="h-5 w-5 text-[var(--foreground)]" />
           </button>
 
           {/* Dots Indicator */}
@@ -189,7 +189,7 @@ export function EnhancedTestimonials() {
             className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--surface)]/50 backdrop-blur-sm transition-all hover:border-[var(--accent)]/50 hover:bg-[var(--accent)]/10"
             aria-label="Next testimonials"
           >
-            <ChevronRight className="h-5 w-5 text-white" />
+            <ChevronRight className="h-5 w-5 text-[var(--foreground)]" />
           </button>
         </div>
       </div>

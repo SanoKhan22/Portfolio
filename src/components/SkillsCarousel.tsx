@@ -16,7 +16,7 @@ export function SkillsCarousel() {
           <p className="text-xs uppercase tracking-[0.2em] text-[var(--color-muted)] md:text-sm md:tracking-[0.3em]">
             What I do
           </p>
-          <h2 className="mt-2 font-display text-2xl text-white md:mt-3 md:text-3xl">
+          <h2 className="mt-2 font-display text-2xl text-[var(--foreground)] md:mt-3 md:text-3xl">
             Full-stack product + growth systems
           </h2>
         </div>

@@ -119,7 +119,7 @@ function FloatingSkillIcon({ skill, isHovered, onHover }: SkillIconProps) {
         className="absolute top-full left-1/2 -translate-x-1/2 mt-4 z-50 pointer-events-none w-max"
       >
         <div className="rounded-lg border border-[var(--color-border)]/50 bg-[var(--surface-raised)]/95 backdrop-blur px-3 py-2 text-center whitespace-nowrap shadow-xl">
-          <p className="text-xs font-semibold text-white">{skill.name}</p>
+          <p className="text-xs font-semibold text-[var(--foreground)]">{skill.name}</p>
           <p className="text-xs text-[var(--color-muted)] mt-0.5">{skill.description}</p>
           <div
             className="mt-1.5 h-1 w-12 rounded-full mx-auto"
