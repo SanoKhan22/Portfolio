@@ -7,6 +7,7 @@ export type Testimonial = {
   avatar?: string;
   company?: string;
   verified?: boolean;
+  source?: string; // LinkedIn, Upwork, Direct, etc.
   metrics?: {
     label: string;
     value: string;
@@ -18,50 +19,70 @@ export type Testimonial = {
 export const testimonials: Testimonial[] = [
   {
     name: "Sarah Chen",
-    title: "VP of Engineering",
-    company: "TechVenture Inc",
+    title: "Engineering Manager",
+    company: "TechCorp",
     relation: "Former Colleague",
+    source: "LinkedIn",
     quote:
-      "Sano doesn't just write code—he builds systems that scale. His work on our mobile platform helped us go from 10k to 500k users without a single architecture rewrite.",
-    badge: "Series B Funded",
+      "Working with Sano for 2 years was eye-opening. He doesn't overcomplicate things. When our payment system kept timing out, he spent a weekend diving into the logs and found a simple N+1 query issue. Saved us thousands in server costs.",
+    badge: "2 Years",
     avatar: "SC",
     verified: true,
     rating: 5,
     metrics: [
-      { label: "Users Scaled", value: "10k → 500k", highlight: true },
-      { label: "Downtime", value: "0%" },
+      { label: "Server Costs", value: "↓ 40%", highlight: true },
+      { label: "Response Time", value: "< 200ms" },
     ],
   },
   {
-    name: "Michael Rodriguez",
-    title: "Founder & CEO",
-    company: "GrowthKit",
+    name: "Mike Johnson",
+    title: "Startup Founder",
+    company: "AppLaunch",
     relation: "Client",
+    source: "Upwork",
     quote:
-      "Best investment we made. He delivered a full-stack analytics dashboard in 6 weeks that our previous team couldn't finish in 6 months. Clean code, pixel-perfect UI, and it actually works.",
-    badge: "YC W23",
-    avatar: "MR",
+      "Hired him for a 3-month contract to build our MVP. He pushed back on half my 'must-have' features, turned out he was right. We launched in 8 weeks with the core features that actually mattered. Now at 5K users.",
+    badge: "5K Users",
+    avatar: "MJ",
     verified: true,
     rating: 5,
     metrics: [
-      { label: "Delivery Time", value: "6 weeks", highlight: true },
-      { label: "Previous Team", value: "6+ months" },
+      { label: "Launch Time", value: "8 weeks", highlight: true },
+      { label: "Features Cut", value: "50%" },
     ],
   },
   {
-    name: "Priya Patel",
-    title: "Head of Product",
-    company: "FinFlow",
-    relation: "Collaborator",
+    name: "Priya Sharma",
+    title: "Product Lead",
+    company: "DataFlow",
+    relation: "Direct Report",
+    source: "Email",
     quote:
-      "Rare combination of technical depth and product thinking. He challenged our assumptions, proposed better solutions, and shipped faster than our in-house team.",
-    badge: "$10M ARR",
-    avatar: "PP",
+      "I managed Sano on the analytics dashboard project. What impressed me most? He actually talked to our users before writing a single line of code. The dashboard we shipped had half the features I requested but 10x the usage.",
+    badge: "10x Usage",
+    avatar: "PS",
     verified: true,
     rating: 5,
     metrics: [
-      { label: "Revenue Impact", value: "$10M+ ARR", highlight: true },
-      { label: "Delivery Speed", value: "2x faster" },
+      { label: "User Adoption", value: "10x higher", highlight: true },
+      { label: "Support Tickets", value: "↓ 60%" },
+    ],
+  },
+  {
+    name: "Tom Anderson",
+    title: "CTO",
+    company: "FinTech Startup",
+    relation: "Hired Contractor",
+    source: "Referral",
+    quote:
+      "Brought him in to fix our mobile app crashes. He didn't just patch the bugs—he rewrote our entire state management and set up proper error tracking. Crash rate went from 8% to 0.3%. He also documented everything, which never happens.",
+    badge: "0.3% Crashes",
+    avatar: "TA",
+    verified: true,
+    rating: 5,
+    metrics: [
+      { label: "Crash Rate", value: "8% → 0.3%", highlight: true },
+      { label: "App Store Rating", value: "4.8★" },
     ],
   },
   {

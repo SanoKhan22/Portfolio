@@ -1,7 +1,7 @@
 import { Hero } from "@/components/Hero";
 import { SkillsCarousel } from "@/components/SkillsCarousel";
 import { StatsSection } from "@/components/StatsSection";
-import { PremiumFeaturedProjects } from "@/components/PremiumFeaturedProjects";
+import PremiumFeaturedProjects from "@/components/PremiumFeaturedProjects";
 import { GitHubContributionsCalendar } from "@/components/GitHubContributionsCalendar";
 import { Timeline } from "@/components/Timeline";
 import { EnhancedTestimonials } from "@/components/EnhancedTestimonials";
@@ -35,13 +35,13 @@ export default function Home() {
           <GitHubContributionsCalendar />
         </section>
         
-        <section id="testimonials">
-          <EnhancedTestimonials />
-        </section>
-        
         {/* Timeline & Experience */}
         <section id="experience">
           <Timeline />
+        </section>
+        
+        <section id="testimonials">
+          <EnhancedTestimonials />
         </section>
         
         <section id="contact">

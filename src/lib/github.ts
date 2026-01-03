@@ -6,6 +6,7 @@ export interface GitHubRepo {
   description: string;
   url: string;
   homepageUrl: string | null;
+  openGraphImageUrl: string;
   primaryLanguage: {
     name: string;
     color: string;
@@ -36,6 +37,10 @@ export interface GitHubRepo {
   commitCount?: number;
   stargazerCount: number;
   forkCount: number;
+  branchCount: number;
+  dependencyCount: number;
+  releaseCount: number;
+  codeSize: number;
   updatedAt: string;
   createdAt: string;
   pushedAt: string;
