@@ -5,7 +5,7 @@ import { useScrollPosition } from "@/hooks/useScrollPosition";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import ThemeToggle from "@/components/ThemeToggle";
 import { Menu, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 const navLinks = [
   { id: "home", label: "Home" },
@@ -38,17 +38,16 @@ export default function FloatingHeaderOption1() {
     return () => clearTimeout(timer);
   }, []);
 
+  const handleIntersection = useCallback((entries: IntersectionObserverEntry[]) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        setActiveSection(entry.target.id);
+      }
+    });
+  }, []);
+
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
+    const observer = new IntersectionObserver(handleIntersection, { threshold: 0.3 });
 
     navLinks.forEach((link) => {
       let element;
@@ -63,7 +62,7 @@ export default function FloatingHeaderOption1() {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [handleIntersection]);
 
   const scrollToSection = (id: string) => {
     setIsMobileMenuOpen(false);

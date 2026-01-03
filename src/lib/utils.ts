@@ -29,3 +29,34 @@ export function getAnimationDuration(baseDuration: number, reducedDuration: numb
   if (isMobile()) return baseDuration * 0.7; // 30% faster on mobile
   return baseDuration;
 }
+
+/**
+ * Throttle function to limit execution frequency
+ * @param func - Function to throttle
+ * @param delay - Minimum time between executions in milliseconds
+ * @returns Throttled function
+ */
+export function throttle<T extends (...args: any[]) => void>(
+  func: T,
+  delay: number
+): (...args: Parameters<T>) => void {
+  let lastCall = 0;
+  let timeoutId: NodeJS.Timeout | null = null;
+
+  return function (...args: Parameters<T>) {
+    const now = Date.now();
+    const timeSinceLastCall = now - lastCall;
+
+    if (timeSinceLastCall >= delay) {
+      lastCall = now;
+      func(...args);
+    } else {
+      // Schedule call for when delay expires
+      if (timeoutId) clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        lastCall = Date.now();
+        func(...args);
+      }, delay - timeSinceLastCall);
+    }
+  };
+}

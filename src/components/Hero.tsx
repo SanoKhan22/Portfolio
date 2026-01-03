@@ -146,8 +146,10 @@ export function Hero() {
       setHeroPixels(createHeroPixels(getPixelCount(mobile)));
     };
     checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    // Throttle resize to 150ms to prevent excessive recalculations
+    const throttledResize = throttle(checkMobile, 150);
+    window.addEventListener("resize", throttledResize);
+    return () => window.removeEventListener("resize", throttledResize);
   }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {

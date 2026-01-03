@@ -28,7 +28,8 @@ import {
   Server
 } from "lucide-react";
 import { useGitHubTimeline } from "@/hooks/useGitHub";
-import { useMemo, useState, useRef, useEffect } from "react";
+import { useMemo, useState, useRef, useEffect, memo } from "react";
+import { throttle } from "@/lib/utils";
 
 // Badge configuration with icons and colors
 const badgeConfig: Record<string, { icon: any; label: string; color: string }> = {
@@ -210,6 +211,9 @@ function TimelineItem({
   );
 }
 
+// Memoize TimelineItem to prevent unnecessary re-renders
+const MemoizedTimelineItem = memo(TimelineItem);
+
 export function Timeline() {
   const { timelineRepos, isLoading } = useGitHubTimeline();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -234,10 +238,12 @@ export function Timeline() {
       setCanScrollRight(scrollLeft < maxScroll - 10);
     };
 
-    container.addEventListener('scroll', handleScroll);
+    // Throttle scroll events to 100ms for performance
+    const throttledScroll = throttle(handleScroll, 100);
+    container.addEventListener('scroll', throttledScroll);
     handleScroll(); // Initial check
 
-    return () => container.removeEventListener('scroll', handleScroll);
+    return () => container.removeEventListener('scroll', throttledScroll);
   }, [isLoading, timelineRepos]);
 
   // Mouse drag handlers
@@ -407,7 +413,7 @@ export function Timeline() {
             ) : (
               <div className="flex gap-6 px-4 md:gap-8 md:px-8">
                 {combinedTimeline.map((item, index) => (
-                  <TimelineItem 
+                  <MemoizedTimelineItem 
                     key={`${item.entry.title}-${index}`} 
                     entry={item.entry} 
                     index={index}
