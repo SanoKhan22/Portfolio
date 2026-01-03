@@ -17,6 +17,51 @@
   
   /* RGB values for accent colors (for opacity control) */
   --color-accent-rgb: 14, 110, 85;
+  
+  /* Gradients */
+  --background-gradient: radial-gradient(circle at top, #07100c 0%, #020302 55%, #010101 100%);
+  --hero-glow-gradient: linear-gradient(to bottom, rgba(14, 110, 85, 0.25) 0%, rgba(51, 255, 180, 0.1) 50%, transparent 100%);
+  
+  /* Component-specific */
+  --toggle-bg: rgba(178, 192, 183, 0.15);
+  --toggle-bg-hover: rgba(178, 192, 183, 0.25);
+  --button-text: #000000;
+}
+
+/* Light Theme */
+:root.light {
+  color-scheme: light;
+  
+  /* Base Colors */
+  --background: #fafbfa;
+  --foreground: #1a2420;
+  --muted: #647067;
+  
+  /* Surface Layers */
+  --surface: #ffffff;
+  --surface-raised: #f0f4f2;
+  
+  /* Accent Colors */
+  --accent: #0e6e55;
+  --accent-strong: #0a5a47;
+  
+  /* Borders */
+  --border: #d1dbd4;
+  
+  /* Shadows & Effects */
+  --glow: 0 20px 60px rgba(14, 110, 85, 0.12);
+  
+  /* RGB values */
+  --color-accent-rgb: 14, 110, 85;
+  
+  /* Gradients */
+  --background-gradient: radial-gradient(circle at top, #f0f4f2 0%, #ffffff 55%, #fafbfa 100%);
+  --hero-glow-gradient: linear-gradient(to bottom, rgba(14, 110, 85, 0.08) 0%, rgba(51, 255, 180, 0.05) 50%, transparent 100%);
+  
+  /* Component-specific */
+  --toggle-bg: rgba(100, 112, 103, 0.15);
+  --toggle-bg-hover: rgba(100, 112, 103, 0.25);
+  --button-text: #ffffff;
 }
 
 @theme inline {
@@ -41,9 +86,22 @@
   box-sizing: border-box;
 }
 
+/* Theme transition */
+* {
+  transition: background-color 200ms ease-in-out,
+              border-color 200ms ease-in-out,
+              color 200ms ease-in-out;
+}
+
+/* Disable transitions for animations */
+[class*="animate-"],
+.no-theme-transition {
+  transition: none !important;
+}
+
 body {
   min-height: 100vh;
-  background: radial-gradient(circle at top, #07100c 0%, #020302 55%, #010101 100%);
+  background: var(--background-gradient);
   color: var(--foreground);
   font-family: var(--font-body), system-ui, -apple-system, BlinkMacSystemFont;
   letter-spacing: 0.02em;

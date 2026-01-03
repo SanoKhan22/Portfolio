@@ -1,9 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export", // Enable static export for Netlify
+  // Temporarily disabled static export due to API routes
+  // Will need to move API calls to client-side or use edge functions
   images: {
-    unoptimized: true, // Required for static export
+    unoptimized: true,
   },
 };
 

@@ -13,16 +13,24 @@ export default function ThemeToggle() {
     setMounted(true);
   }, []);
 
+  const handleToggle = () => {
+    // Haptic feedback for mobile devices
+    if ('vibrate' in navigator) {
+      navigator.vibrate(10);
+    }
+    toggleTheme();
+  };
+
   if (!mounted) {
     return (
-      <div className="w-9 h-9 rounded-full bg-muted/50" />
+      <div className="w-12 h-12 rounded-full bg-[var(--toggle-bg)]" />
     );
   }
 
   return (
     <motion.button
-      onClick={toggleTheme}
-      className="w-9 h-9 rounded-full bg-muted/50 hover:bg-muted flex items-center justify-center transition-colors duration-200"
+      onClick={handleToggle}
+      className="w-12 h-12 rounded-full bg-[var(--toggle-bg)] hover:bg-[var(--toggle-bg-hover)] focus:ring-2 focus:ring-[var(--accent)] focus:outline-none flex items-center justify-center transition-colors duration-200 no-theme-transition"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
@@ -33,9 +41,9 @@ export default function ThemeToggle() {
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
         {theme === "light" ? (
-          <Moon className="w-4 h-4 text-foreground" />
+          <Moon className="w-5 h-5 text-[var(--foreground)]" />
         ) : (
-          <Sun className="w-4 h-4 text-foreground" />
+          <Sun className="w-5 h-5 text-[var(--foreground)]" />
         )}
       </motion.div>
     </motion.button>

@@ -20,20 +20,44 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const stored = localStorage.getItem("theme") as Theme | null;
     if (stored) {
       setTheme(stored);
-      document.documentElement.classList.toggle("dark", stored === "dark");
+      document.documentElement.classList.toggle("light", stored === "light");
     } else {
       const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
       const initial = prefersDark ? "dark" : "light";
       setTheme(initial);
-      document.documentElement.classList.toggle("dark", initial === "dark");
+      document.documentElement.classList.toggle("light", initial === "light");
     }
+  }, []);
+
+  // Listen for system theme changes
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    
+    const handleChange = (e: MediaQueryListEvent) => {
+      const stored = localStorage.getItem("theme");
+      if (!stored) {
+        const newTheme = e.matches ? "dark" : "light";
+        setTheme(newTheme);
+        document.documentElement.classList.toggle("light", newTheme === "light");
+      }
+    };
+    
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
-    document.documentElement.classList.toggle("dark", newTheme === "dark");
+    document.documentElement.classList.toggle("light", newTheme === "light");
+    
+    // Update meta theme-color for mobile browsers
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (metaThemeColor) {
+      const bgColor = newTheme === 'light' ? '#fafbfa' : '#030503';
+      metaThemeColor.setAttribute('content', bgColor);
+    }
   };
 
   return (

@@ -44,6 +44,10 @@ export const metadata: Metadata = {
     "growth",
     "entrepreneur",
   ],
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fafbfa" },
+    { media: "(prefers-color-scheme: dark)", color: "#030503" },
+  ],
 };
 
 export default function RootLayout({
