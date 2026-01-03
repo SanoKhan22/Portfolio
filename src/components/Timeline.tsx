@@ -128,7 +128,7 @@ function TimelineItem({
           y: -4,
           transition: { type: "spring", stiffness: 400, damping: 15 }
         }}
-        className="group/card relative flex h-[300px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 shadow-[0_8px_32px_rgba(0,0,0,0.3)] backdrop-blur-xl transition-all duration-300 hover:border-[var(--accent)]/30 hover:bg-white/8 hover:shadow-[0_12px_40px_rgba(51,255,180,0.1)]"
+        className="group/card relative flex h-[300px] flex-col overflow-hidden rounded-2xl border border-[var(--color-border)]/30 bg-[var(--surface)]/80 p-5 shadow-[0_8px_32px_rgba(0,0,0,0.3)] backdrop-blur-xl transition-all duration-300 hover:border-[var(--accent)]/30 hover:bg-[var(--surface-raised)]/90 hover:shadow-[0_12px_40px_rgba(51,255,180,0.1)]"
       >
         {/* Glass Reflection Shimmer Effect */}
         <motion.div
@@ -139,11 +139,11 @@ function TimelineItem({
             transition: { duration: 0.6, ease: "easeInOut" }
           }}
         >
-          <div className="h-full w-1/3 bg-gradient-to-r from-transparent via-white/5 to-transparent blur-sm" />
+          <div className="h-full w-1/3 bg-gradient-to-r from-transparent via-[var(--foreground)]/5 to-transparent blur-sm" />
         </motion.div>
         
         {/* Header */}
-        <div className="relative z-10 mb-3 flex items-center justify-between border-b border-white/10 pb-3">
+        <div className="relative z-10 mb-3 flex items-center justify-between border-b border-[var(--color-border)]/30 pb-3">
           {isInView ? (
             <Typewriter 
               text={entry.date}
@@ -190,7 +190,7 @@ function TimelineItem({
             {entry.technologies.map((tech) => (
               <span
                 key={tech}
-                className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[10px] text-white/80 backdrop-blur-sm transition-all hover:border-[var(--accent)]/30 hover:bg-white/10 hover:text-white"
+                className="rounded-md border border-[var(--color-border)]/30 bg-[var(--surface)]/80 px-2 py-0.5 font-mono text-[10px] text-[var(--foreground)]/80 backdrop-blur-sm transition-all hover:border-[var(--accent)]/30 hover:bg-[var(--surface-raised)] hover:text-[var(--foreground)]"
               >
                 {tech}
               </span>
@@ -199,7 +199,7 @@ function TimelineItem({
         )}
         
         {/* Subtle inner glow */}
-        <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-white/5 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover/card:opacity-100" />
+        <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-[var(--foreground)]/5 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover/card:opacity-100" />
       </motion.div>
     </motion.div>
   );

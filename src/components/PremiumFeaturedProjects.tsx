@@ -109,7 +109,7 @@ function ProjectCard({ repo, index }: { repo: GitHubRepo; index: number }) {
       <div className="flex flex-1 flex-col p-6">
         {/* Header */}
         <div className="mb-4">
-          <h3 className="mb-2 text-xl font-bold text-white group-hover:text-[var(--accent-strong)] transition-colors">
+          <h3 className="mb-2 text-xl font-bold text-[var(--foreground)] group-hover:text-[var(--accent-strong)] transition-colors">
             {repo.name}
           </h3>
           <p className="text-sm leading-relaxed text-[var(--color-muted)]">

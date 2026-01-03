@@ -66,7 +66,7 @@ export function ContactCta() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className="mt-6 font-display text-3xl font-bold text-white sm:text-4xl md:text-5xl lg:text-6xl break-words"
+          className="mt-6 font-display text-3xl font-bold text-[var(--foreground)] sm:text-4xl md:text-5xl lg:text-6xl break-words"
         >
           Let&apos;s build something{" "}
           <span className="bg-gradient-to-r from-[var(--accent)] to-[var(--accent-strong)] bg-clip-text text-transparent">
@@ -93,11 +93,11 @@ export function ContactCta() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
-          className="mt-4 inline-flex items-center gap-2 rounded-full bg-white/5 px-4 py-2 backdrop-blur-sm"
+          className="mt-4 inline-flex items-center gap-2 rounded-full bg-[var(--surface)]/50 px-4 py-2 backdrop-blur-sm"
         >
           <Clock className="h-4 w-4 text-[var(--accent)]" />
-          <span className="text-sm text-white/80">
-            <span className="font-semibold text-white">12-hour</span> response time
+          <span className="text-sm text-[var(--muted)]">
+            <span className="font-semibold text-[var(--foreground)]">12-hour</span> response time
           </span>
         </motion.div>
 
@@ -132,7 +132,7 @@ export function ContactCta() {
             href="mailto:hey@sano.dev"
             onMouseEnter={() => setHoveredButton("email")}
             onMouseLeave={() => setHoveredButton(null)}
-            className="group/btn relative overflow-hidden rounded-full border-2 border-white/20 bg-white/5 px-8 py-4 text-base font-bold text-white backdrop-blur-sm transition-all duration-300 hover:border-[var(--accent)]/50 hover:bg-white/10 active:scale-95 sm:px-10"
+            className="group/btn relative overflow-hidden rounded-full border-2 border-[var(--color-border)]/50 bg-[var(--surface)]/50 px-8 py-4 text-base font-bold text-[var(--foreground)] backdrop-blur-sm transition-all duration-300 hover:border-[var(--accent)]/50 hover:bg-[var(--surface-raised)]/80 active:scale-95 sm:px-10"
           >
             <motion.div
               animate={{
@@ -181,8 +181,8 @@ export function ContactCta() {
                     className="absolute inset-0 bg-gradient-to-r from-[var(--accent)] to-[var(--accent-strong)]"
                   />
                   <div className="relative z-10 flex items-center gap-2">
-                    <Icon className="h-4 w-4 text-white/80 transition-colors group-hover/social:text-[var(--accent)]" />
-                    <span className="text-sm font-medium text-white/80 transition-colors group-hover/social:text-white">
+                    <Icon className="h-4 w-4 text-[var(--muted)] transition-colors group-hover/social:text-[var(--accent)]" />
+                    <span className="text-sm font-medium text-[var(--muted)] transition-colors group-hover/social:text-[var(--foreground)]">
                       {link.label}
                     </span>
                   </div>
