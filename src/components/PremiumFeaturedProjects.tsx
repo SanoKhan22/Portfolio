@@ -283,7 +283,7 @@ export default function PremiumFeaturedProjects() {
           {/* Projects Grid */}
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {featuredRepos.map((repo, index) => (
-              <ProjectCard key={repo.id} repo={repo} index={index} />
+              <ProjectCard key={repo.name} repo={repo} index={index} />
             ))}
           </div>
 
