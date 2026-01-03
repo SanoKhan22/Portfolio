@@ -7,11 +7,11 @@ import { RevealOnScroll } from "@/components/animations/RevealOnScroll";
 import { ChevronLeft, ChevronRight, Activity } from "lucide-react";
 
 const CONTRIBUTION_COLORS = {
-  NONE: "var(--surface-raised)",
-  LEVEL_1: "#0e4429",
-  LEVEL_2: "#006d32",
-  LEVEL_3: "#26a641",
-  LEVEL_4: "#39d353",
+  NONE: "var(--contrib-none)",
+  LEVEL_1: "var(--contrib-level-1)",
+  LEVEL_2: "var(--contrib-level-2)",
+  LEVEL_3: "var(--contrib-level-3)",
+  LEVEL_4: "var(--contrib-level-4)",
 };
 
 function getContributionLevel(count: number): string {
@@ -67,7 +67,7 @@ export function GitHubContributionsCalendar() {
               <Activity className="h-4 w-4" />
               GitHub Activity
             </p>
-            <h2 className="mt-2 font-display text-2xl text-white md:mt-3 md:text-3xl">
+            <h2 className="mt-2 font-display text-2xl text-[var(--foreground)] md:mt-3 md:text-3xl">
               Contribution Calendar
             </h2>
           </div>
@@ -78,13 +78,13 @@ export function GitHubContributionsCalendar() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={handlePreviousYear}
-              className="rounded-lg border border-[var(--color-border)] bg-[var(--surface)] p-2 text-white transition hover:bg-[var(--surface-raised)]"
+              className="rounded-lg border border-[var(--color-border)] bg-[var(--surface)] p-2 text-[var(--foreground)] transition hover:bg-[var(--surface-raised)]"
               aria-label="Previous year"
             >
               <ChevronLeft className="h-4 w-4" />
             </motion.button>
             
-            <span className="min-w-[4rem] text-center font-mono text-lg font-semibold text-white">
+            <span className="min-w-[4rem] text-center font-mono text-lg font-semibold text-[var(--foreground)]">
               {selectedYear}
             </span>
             
@@ -93,7 +93,7 @@ export function GitHubContributionsCalendar() {
               whileTap={{ scale: 0.9 }}
               onClick={handleNextYear}
               disabled={selectedYear >= currentYear}
-              className="rounded-lg border border-[var(--color-border)] bg-[var(--surface)] p-2 text-white transition hover:bg-[var(--surface-raised)] disabled:cursor-not-allowed disabled:opacity-40"
+              className="rounded-lg border border-[var(--color-border)] bg-[var(--surface)] p-2 text-[var(--foreground)] transition hover:bg-[var(--surface-raised)] disabled:cursor-not-allowed disabled:opacity-40"
               aria-label="Next year"
             >
               <ChevronRight className="h-4 w-4" />
@@ -112,7 +112,7 @@ export function GitHubContributionsCalendar() {
               <div className="space-y-4">
                 {/* Total Contributions */}
                 <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-bold text-white">
+                  <span className="text-3xl font-bold text-[var(--foreground)]">
                     {contributions.totalContributions.toLocaleString()}
                   </span>
                   <span className="text-sm text-[var(--color-muted)]">
@@ -183,7 +183,7 @@ export function GitHubContributionsCalendar() {
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="absolute left-1/2 top-full mt-4 -translate-x-1/2 transform whitespace-nowrap rounded-lg border border-[var(--color-border)] bg-[var(--surface-raised)] px-3 py-2 text-sm text-white shadow-lg"
+                      className="absolute left-1/2 top-full mt-4 -translate-x-1/2 transform whitespace-nowrap rounded-lg border border-[var(--color-border)] bg-[var(--surface-raised)] px-3 py-2 text-sm text-[var(--foreground)] shadow-lg"
                     >
                       <div className="font-semibold">
                         {hoveredDay.count} contribution{hoveredDay.count !== 1 ? "s" : ""}

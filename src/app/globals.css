@@ -26,6 +26,13 @@
   --toggle-bg: rgba(178, 192, 183, 0.15);
   --toggle-bg-hover: rgba(178, 192, 183, 0.25);
   --button-text: #000000;
+  
+  /* GitHub Contribution Colors (Dark Theme) */
+  --contrib-none: var(--surface-raised);
+  --contrib-level-1: #0e4429;
+  --contrib-level-2: #006d32;
+  --contrib-level-3: #26a641;
+  --contrib-level-4: #39d353;
 }
 
 /* Light Theme */
@@ -62,6 +69,13 @@
   --toggle-bg: rgba(100, 112, 103, 0.15);
   --toggle-bg-hover: rgba(100, 112, 103, 0.25);
   --button-text: #ffffff;
+  
+  /* GitHub Contribution Colors (Light Theme - adjusted for visibility) */
+  --contrib-none: var(--surface);
+  --contrib-level-1: #9be9a8;
+  --contrib-level-2: #40c463;
+  --contrib-level-3: #30a14e;
+  --contrib-level-4: #216e39;
 }
 
 @theme inline {
