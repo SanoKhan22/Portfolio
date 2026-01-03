@@ -70,7 +70,7 @@ export default function FloatingHeaderOption4() {
               <div className="flex items-center gap-3">
                 <motion.button
                   onClick={() => scrollToSection("home")}
-                  className="text-2xl font-bold font-display text-white hover:text-[var(--accent)] transition-colors"
+                  className="text-2xl font-bold font-display text-[var(--foreground)] hover:text-[var(--accent)] transition-colors"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -93,7 +93,7 @@ export default function FloatingHeaderOption4() {
                   <motion.button
                     key={link.id}
                     onClick={() => scrollToSection(link.id)}
-                    className="text-sm font-medium text-[var(--color-muted)] hover:text-white transition-colors relative group"
+                    className="text-sm font-medium text-[var(--color-muted)] hover:text-[var(--foreground)] transition-colors relative group"
                     whileHover={{ y: -2 }}
                     whileTap={{ y: 0 }}
                   >
@@ -112,7 +112,7 @@ export default function FloatingHeaderOption4() {
                 <ThemeToggle />
                 <motion.button
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="p-2 text-white"
+                  className="p-2 text-[var(--foreground)]"
                   whileTap={{ scale: 0.9 }}
                   aria-label="Toggle menu"
                 >
@@ -146,7 +146,7 @@ export default function FloatingHeaderOption4() {
               <motion.button
                 key={link.id}
                 onClick={() => scrollToSection(link.id)}
-                className="text-2xl font-medium text-white hover:text-[var(--accent)] transition-colors"
+                className="text-2xl font-medium text-[var(--foreground)] hover:text-[var(--accent)] transition-colors"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.1 + index * 0.1 }}

@@ -80,7 +80,7 @@ export function ContactCta() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
-          className="mt-4 max-w-2xl text-base leading-relaxed text-white/70 md:mt-6 md:text-lg"
+          className="mt-4 max-w-2xl text-base leading-relaxed text-[var(--color-secondary)] md:mt-6 md:text-lg"
         >
           I partner with founders, product, and growth teams as an embedded
           engineer. Book a working session, request a build, or send a loom — I&apos;ll
@@ -153,7 +153,7 @@ export function ContactCta() {
           transition={{ delay: 0.7 }}
           className="mt-8 md:mt-10"
         >
-          <p className="mb-4 text-sm font-medium text-white/60">Or find me on</p>
+          <p className="mb-4 text-sm font-medium text-[var(--muted)]">Or find me on</p>
           <div className="flex flex-wrap gap-3">
             {socialLinks.map((link, index) => {
               const Icon = iconMap[link.icon as keyof typeof iconMap] ?? Mail;

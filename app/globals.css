@@ -5,6 +5,7 @@
   --background: #030503;
   --foreground: #f6f8f7;
   --muted: #b2c0b7;
+  --secondary: #9aafb8;
   --surface: #080d0b;
   --surface-raised: #0f1512;
   --accent: #0e6e55;
@@ -43,6 +44,7 @@
   --background: #f0f2f1;
   --foreground: #2d3a34;
   --muted: #5a6860;
+  --secondary: #6b7a73;
   
   /* Surface Layers - Cream/sage tint */
   --surface: #f7f9f8;
@@ -71,17 +73,18 @@
   --button-text: #ffffff;
   
   /* GitHub Contribution Colors (Light Theme) */
-  --contrib-none: #e8ebe9;
-  --contrib-level-1: #9be9a8;
-  --contrib-level-2: #40c463;
-  --contrib-level-3: #30a14e;
-  --contrib-level-4: #216e39;
+  --contrib-none: #d4d9d5;
+  --contrib-level-1: #85e89d;
+  --contrib-level-2: #34d399;
+  --contrib-level-3: #10b981;
+  --contrib-level-4: #059669;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
+  --color-secondary: var(--secondary);
   --color-surface: var(--surface);
   --color-surface-raised: var(--surface-raised);
   --color-accent: var(--accent);

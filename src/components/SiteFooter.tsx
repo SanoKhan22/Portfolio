@@ -105,8 +105,8 @@ export function SiteFooter() {
                 </div>
               )}
               <div className="flex items-center gap-2">
-                <Activity className="h-3.5 w-3.5 text-green-500" />
-                <span className="text-green-400">Available for work</span>
+                <Activity className="h-3.5 w-3.5 text-[var(--accent)]" />
+                <span className="text-[var(--accent-strong)]">Available for work</span>
               </div>
               <div className="flex items-center gap-2 pt-2 mt-2 border-t border-[var(--color-border)]/30">
                 <GraduationCap className="h-4 w-4 text-[var(--accent)] flex-shrink-0" />

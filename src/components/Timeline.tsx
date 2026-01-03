@@ -108,7 +108,7 @@ function TimelineItem({
             <motion.div
               initial={{ opacity: 0, y: -5 }}
               animate={{ opacity: 1, y: 0 }}
-              className="absolute left-1/2 top-full z-20 mt-2 -translate-x-1/2 whitespace-nowrap rounded-md border border-[var(--color-border)] bg-[var(--surface)] px-3 py-1.5 text-xs font-medium text-white shadow-lg"
+              className="absolute left-1/2 top-full z-20 mt-2 -translate-x-1/2 whitespace-nowrap rounded-md border border-[var(--color-border)] bg-[var(--surface)] px-3 py-1.5 text-xs font-medium text-[var(--foreground)] shadow-lg"
             >
               {badgeInfo.label}
               <div 
@@ -163,7 +163,7 @@ function TimelineItem({
               href={entry.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group/link text-white/60 transition-all hover:scale-110 hover:text-[var(--accent)]"
+              className="group/link text-[var(--muted)] transition-all hover:scale-110 hover:text-[var(--accent)]"
               onClick={(e) => e.stopPropagation()}
             >
               <ExternalLink size={22} className="transition-all group-hover/link:rotate-12 group-hover/link:drop-shadow-[0_0_8px_rgba(51,255,180,0.5)]" />
@@ -172,15 +172,15 @@ function TimelineItem({
         </div>
 
         {/* Title */}
-        <h3 className="relative z-10 mb-2 font-display text-base font-bold leading-tight text-white">
+        <h3 className="relative z-10 mb-2 font-display text-base font-bold leading-tight text-[var(--foreground)]">
           {entry.title}
         </h3>
-        <p className="relative z-10 mb-3 font-mono text-xs text-white/50">
+        <p className="relative z-10 mb-3 font-mono text-xs text-[var(--muted)]">
           {entry.organization}
         </p>
 
         {/* Description */}
-        <p className="relative z-10 mb-auto line-clamp-3 text-xs leading-relaxed text-white/70 pb-14">
+        <p className="relative z-10 mb-auto line-clamp-3 text-xs leading-relaxed text-[var(--color-secondary)] pb-14">
           {entry.description}
         </p>
 
@@ -347,7 +347,7 @@ export function Timeline() {
   }, [timelineRepos]);
 
   return (
-    <section className="relative overflow-hidden py-16 md:py-24">
+    <section className="relative overflow-hidden py-16 md:py-24 bg-[var(--accent)]/3">
       {/* Background */}
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-10" />
 
@@ -366,7 +366,7 @@ export function Timeline() {
             </span>
           </div>
           
-          <h2 className="mt-4 font-display text-3xl font-bold text-white md:text-4xl">
+          <h2 className="mt-4 font-display text-3xl font-bold text-[var(--foreground)] md:text-4xl">
             <span className="font-mono text-[var(--accent)]">{'>'} </span>
             Journey & Experience
           </h2>
@@ -453,12 +453,12 @@ export function Timeline() {
                     initial={{ scale: 0.4 }}
                     animate={{ 
                       scale: isActive ? 0.8 : 0.4,
-                      backgroundColor: isActive ? 'var(--accent)' : 'var(--surface)',
-                      opacity: isActive ? 1 : 0.5
+                      backgroundColor: isActive ? 'var(--accent)' : 'var(--accent)/25',
+                      opacity: 1
                     }}
-                    whileHover={{ scale: isActive ? 1 : 0.6, opacity: 1 }}
+                    whileHover={{ scale: isActive ? 1 : 0.6, backgroundColor: isActive ? 'var(--accent)' : 'var(--accent)/40' }}
                     transition={{ duration: 0.3 }}
-                    className="h-1 w-1 rounded-full border border-[var(--color-border)] transition-all"
+                    className="h-1 w-1 rounded-full border border-[var(--accent)]/40 transition-all"
                     title={`Projects around ${representedIndex + 1}`}
                   />
                 );

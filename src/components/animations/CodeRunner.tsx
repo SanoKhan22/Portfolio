@@ -213,7 +213,7 @@ export function CodeRunner({ onComplete }: CodeRunnerProps) {
                                 <p className="text-xs font-semibold text-[var(--accent-strong)] mb-1">
                                     ✓ Execution Complete
                                 </p>
-                                <p className="text-sm text-white/90 leading-relaxed">
+                                <p className="text-sm text-[var(--foreground)]/90 leading-relaxed">
                                     Building software and digital products that solve real problems.
                                 </p>
                             </div>

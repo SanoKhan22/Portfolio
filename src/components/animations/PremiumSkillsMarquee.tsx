@@ -104,10 +104,10 @@ function FloatingSkillIcon({ skill, isHovered, onHover }: SkillIconProps) {
         className="relative z-10 transition-all duration-500 ease-out cursor-pointer"
         size={56}
         style={{
-          color: isHovered ? skill.color : "#94A3B8",
+          color: isHovered ? skill.color : "var(--muted)",
           filter: isHovered
             ? `drop-shadow(0 0 20px ${skill.color}) brightness(1.3)`
-            : "grayscale(100%) brightness(0.85)",
+            : "grayscale(80%) brightness(0.9)",
         }}
       />
 

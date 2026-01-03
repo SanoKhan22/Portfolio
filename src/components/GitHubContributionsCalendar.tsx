@@ -149,7 +149,7 @@ export function GitHubContributionsCalendar() {
                                   delay: (weekIndex * 7 + dayIndex) * 0.001,
                                   duration: 0.2,
                                 }}
-                                whileHover={{ scale: 1.5, zIndex: 10 }}
+                                whileHover={{ scale: 1.5, zIndex: 10, boxShadow: `0 0 12px ${level}80` }}
                                 onMouseEnter={() =>
                                   setHoveredDay({
                                     date: day.date,
@@ -157,12 +157,12 @@ export function GitHubContributionsCalendar() {
                                   })
                                 }
                                 onMouseLeave={() => setHoveredDay(null)}
-                                className="h-3 w-3 rounded-sm transition-all"
+                                className="h-3 w-3 rounded-sm transition-all border border-[var(--color-border)]/40 cursor-pointer hover:border-[var(--accent)]/70 hover:shadow-lg"
                                 style={{
                                   backgroundColor: level,
                                   outline:
                                     hoveredDay?.date === day.date
-                                      ? "2px solid var(--color-accent)"
+                                      ? "2px solid var(--accent)"
                                       : "none",
                                 }}
                                 title={`${date.toLocaleDateString("en-US", {

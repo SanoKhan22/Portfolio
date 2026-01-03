@@ -118,17 +118,17 @@ export function StatsSection() {
 
                         {/* Terminal Command */}
                         <div className="mb-3 font-mono text-sm text-[var(--color-secondary)]">
-                            <span className="text-green-400">$</span> {stat.command}
+                            <span className="text-[var(--accent)]">$</span> {stat.command}
                         </div>
 
                         {/* Terminal Output - Loading State */}
                         <div className="mb-2 font-mono text-xs text-[var(--color-muted)]">
-                            <span className="text-blue-400">▸</span> Running analysis...
+                            <span className="text-[var(--accent-strong)]">▸</span> Running analysis...
                         </div>
 
                         {/* Terminal Output - Result */}
                         <div className="mb-3 flex items-baseline gap-2 font-mono text-sm">
-                            <span className="text-green-400">✓</span>
+                            <span className="text-[var(--accent)]" >✓</span>
                             <span className="font-display text-4xl font-semibold text-[var(--foreground)] md:text-5xl lg:text-6xl">
                                 {stat.isGitHub && !isLoading ? (
                                     <>

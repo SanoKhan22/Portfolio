@@ -443,7 +443,7 @@ export function Hero() {
                   }}
                   className={`absolute ${config.position} hidden md:block cursor-default`}
                 >
-                  <div className="group rounded-xl border border-[var(--color-border)] bg-[var(--surface-raised)]/90 px-3 py-2.5 text-xs text-white shadow-xl backdrop-blur-xl transition-all duration-300 hover:border-[var(--accent)]/60 hover:bg-[var(--surface-raised)] sm:rounded-2xl sm:px-4 sm:py-3 sm:text-sm">
+                  <div className="group rounded-xl border border-[var(--color-border)] bg-[var(--surface-raised)]/90 px-3 py-2.5 text-xs text-[var(--foreground)] shadow-xl backdrop-blur-xl transition-all duration-300 hover:border-[var(--accent)]/60 hover:bg-[var(--surface-raised)] sm:rounded-2xl sm:px-4 sm:py-3 sm:text-sm">
                     <div className="flex items-center gap-2.5">
                       <motion.div 
                         className={`rounded-lg bg-[var(--surface)]/60 p-1.5 transition-all ${badge.color}`}

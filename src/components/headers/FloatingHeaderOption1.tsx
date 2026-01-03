@@ -1,8 +1,7 @@
 "use client";
 
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
 import ThemeToggle from "@/components/ThemeToggle";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
@@ -17,8 +16,6 @@ const navLinks = [
 
 export default function FloatingHeaderOption1() {
   const { isScrolled } = useScrollPosition();
-  const isMobile = useMediaQuery("(max-width: 768px)");
-  const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [showFullName, setShowFullName] = useState(true);
@@ -29,7 +26,7 @@ export default function FloatingHeaderOption1() {
     restDelta: 0.001,
   });
 
-  // Animate name change after 2 seconds
+  // Animate name change after 2 seconds (only once)
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowFullName(false);
@@ -107,59 +104,54 @@ export default function FloatingHeaderOption1() {
           
           <nav className="px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
-              {/* Logo with Animated Name */}
+              {/* Logo with Animated Name - Shows "Ehsanullah Sano" then animates to just "Sano" */}
               <motion.button
                 onClick={() => scrollToSection("home")}
-                className="text-2xl font-bold font-display relative whitespace-nowrap text-[var(--foreground)]"
+                className="text-2xl font-bold font-display relative whitespace-nowrap text-[var(--foreground)] overflow-visible"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {/* Conditional Animation: Particle effect on desktop, simple fade on mobile */}
-                {!isMobile && !prefersReducedMotion && showFullName ? (
-                  // Desktop: Full particle dispersion effect
-                  <span className="relative inline-block mr-2">
-                    {"Ehsanullah".split("").map((char, index) => (
-                      <motion.span
-                        key={index}
-                        className="inline-block"
-                        animate={{
-                          opacity: showFullName ? 1 : 0,
-                          x: showFullName ? 0 : (index % 2 === 0 ? -50 : 50),
-                          y: showFullName ? 0 : (Math.random() - 0.5) * 100,
-                          scale: showFullName ? 1 : 0,
-                          rotate: showFullName ? 0 : (Math.random() - 0.5) * 360,
-                        }}
-                        transition={{
-                          duration: 0.6,
-                          delay: index * 0.03,
-                          ease: "easeInOut",
-                        }}
-                      >
-                        {char}
-                      </motion.span>
-                    ))}
-                  </span>
-                ) : showFullName ? (
-                  // Mobile/Reduced Motion: Simple fade
-                  <motion.span
-                    className="inline-block mr-2"
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    Ehsanullah
-                  </motion.span>
-                ) : null}
-                
-                <motion.span
-                  className="inline-block"
+                <AnimatePresence>
+                  {showFullName && (
+                    <motion.span
+                      className="inline-block mr-1"
+                      initial={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.8 }}
+                    >
+                      {"Ehsanullah".split("").map((char, index) => (
+                        <motion.span
+                          key={index}
+                          className="inline-block text-[var(--foreground)]"
+                          exit={{
+                            opacity: 0,
+                            x: (index % 2 === 0 ? -1 : 1) * (30 + index * 8),
+                            y: (index % 3 === 0 ? -1 : 1) * (15 + index * 6),
+                            scale: 0.2,
+                            rotate: (index % 2 === 0 ? -1 : 1) * (45 + index * 15),
+                            filter: "blur(4px)",
+                          }}
+                          transition={{
+                            duration: 0.8,
+                            delay: index * 0.04,
+                            ease: [0.25, 0.46, 0.45, 0.94],
+                          }}
+                        >
+                          {char}
+                        </motion.span>
+                      ))}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+                <motion.span 
+                  className="text-[var(--foreground)]"
                   animate={{
-                    x: showFullName ? 0 : (isMobile || prefersReducedMotion ? -130 : -148),
+                    x: showFullName ? 0 : -8,
                   }}
                   transition={{
-                    duration: isMobile || prefersReducedMotion ? 0.3 : 0.5,
-                    delay: isMobile || prefersReducedMotion ? 0 : 0.3,
-                    ease: "easeInOut",
+                    duration: 0.6,
+                    delay: showFullName ? 0 : 0.5,
+                    ease: [0.25, 0.46, 0.45, 0.94],
                   }}
                 >
                   Sano
@@ -208,7 +200,7 @@ export default function FloatingHeaderOption1() {
                 <ThemeToggle />
                 <motion.button
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="p-2 text-white rounded-lg hover:bg-[var(--accent)]/10"
+                  className="p-2 text-[var(--foreground)] rounded-lg hover:bg-[var(--accent)]/10"
                   whileTap={{ scale: 0.9 }}
                   aria-label="Toggle menu"
                 >
@@ -249,7 +241,7 @@ export default function FloatingHeaderOption1() {
                   key={link.id}
                   onClick={() => scrollToSection(link.id)}
                   className={`text-2xl font-medium transition-colors ${
-                    isActive ? "text-[var(--accent)]" : "text-white"
+                    isActive ? "text-[var(--accent)]" : "text-[var(--foreground)]"
                   }`}
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}

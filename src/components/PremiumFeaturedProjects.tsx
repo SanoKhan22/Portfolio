@@ -85,7 +85,7 @@ function ProjectCard({ repo, index }: { repo: GitHubRepo; index: number }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.15, duration: 0.5 }}
       whileHover={{ y: -8 }}
-      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--surface)]/50 backdrop-blur-sm transition-all hover:border-[var(--accent)]/40 hover:bg-[var(--surface)]/70 hover:shadow-xl hover:shadow-[var(--accent)]/5"
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--surface)] backdrop-blur-sm transition-all hover:border-[var(--accent)]/50 hover:bg-[var(--surface-raised)] hover:shadow-lg hover:shadow-[var(--accent)]/10"
     >
       {/* Project Screenshot */}
       <div className="relative w-full overflow-hidden bg-[var(--background)]" style={{ aspectRatio: '1200/630' }}>
@@ -95,7 +95,7 @@ function ProjectCard({ repo, index }: { repo: GitHubRepo; index: number }) {
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--surface)] via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--surface)] via-[var(--surface)]/40 to-transparent" />
       </div>
 
       {/* Category Tag */}
@@ -127,7 +127,7 @@ function ProjectCard({ repo, index }: { repo: GitHubRepo; index: number }) {
               const percentage = ((lang.size / totalSize) * 100).toFixed(1);
               return (
                 <Tooltip key={i} label={`${percentage}%`}>
-                  <span className="inline-flex items-center gap-1.5 rounded-md border border-[var(--color-border)] bg-[var(--background)]/50 px-2.5 py-1 text-xs font-medium text-white cursor-help">
+                  <span className="inline-flex items-center gap-1.5 rounded-md border border-[var(--color-border)] bg-[var(--background)]/50 px-2.5 py-1 text-xs font-medium text-[var(--foreground)] cursor-help">
                     <span
                       className="h-2 w-2 rounded-full"
                       style={{ backgroundColor: lang.node.color || '#64748B' }}
@@ -145,19 +145,19 @@ function ProjectCard({ repo, index }: { repo: GitHubRepo; index: number }) {
           <Tooltip label="Total commits">
             <div className="flex items-center gap-1.5 cursor-help">
               <Activity className="h-4 w-4" />
-              <span className="font-medium text-white">{repo.commitCount || 0}</span>
+              <span className="font-medium text-[var(--foreground)]">{repo.commitCount || 0}</span>
             </div>
           </Tooltip>
           <Tooltip label="Dependencies">
             <div className="flex items-center gap-1.5 cursor-help">
               <Package className="h-4 w-4" />
-              <span className="font-medium text-white">{repo.dependencyCount || 0}</span>
+              <span className="font-medium text-[var(--foreground)]">{repo.dependencyCount || 0}</span>
             </div>
           </Tooltip>
           <Tooltip label="Branches">
             <div className="flex items-center gap-1.5 cursor-help">
               <GitBranch className="h-4 w-4" />
-              <span className="font-medium text-white">{repo.branchCount || 0}</span>
+              <span className="font-medium text-[var(--foreground)]">{repo.branchCount || 0}</span>
             </div>
           </Tooltip>
         </div>
@@ -239,7 +239,7 @@ export default function PremiumFeaturedProjects() {
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mb-4 bg-gradient-to-r from-white via-[var(--accent-strong)] to-white bg-clip-text text-4xl font-bold text-transparent md:text-5xl"
+                className="mb-4 bg-gradient-to-r from-[var(--accent)] via-[var(--accent-strong)] to-[var(--accent)] bg-clip-text text-4xl font-bold text-transparent md:text-5xl"
               >
                 Featured Projects
               </motion.h2>
@@ -271,7 +271,7 @@ export default function PremiumFeaturedProjects() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="mb-4 bg-gradient-to-r from-white via-[var(--accent-strong)] to-white bg-clip-text text-4xl font-bold text-transparent md:text-5xl">
+              <h2 className="mb-4 bg-gradient-to-r from-[var(--accent)] via-[var(--accent-strong)] to-[var(--accent)] bg-clip-text text-4xl font-bold text-transparent md:text-5xl">
                 Featured Projects
               </h2>
               <p className="mx-auto max-w-2xl text-lg text-[var(--color-muted)]">
