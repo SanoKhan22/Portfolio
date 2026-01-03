@@ -182,9 +182,9 @@ export function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="font-display text-5xl font-bold tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl"
+            className="font-display text-5xl font-bold tracking-tight text-[var(--foreground)] sm:text-6xl md:text-7xl lg:text-8xl"
           >
-            <span className="bg-gradient-to-r from-white via-white to-[var(--accent-strong)] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[var(--foreground)] via-[var(--foreground)] to-[var(--accent-strong)] bg-clip-text text-transparent">
               Ehsanullah Sano
             </span>
           </motion.h1>
@@ -241,7 +241,7 @@ export function Hero() {
           {/* Primary CTA */}
           <MagneticButton
             href="#projects"
-            className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-black shadow-[var(--glow)] transition hover:bg-[var(--accent-strong)] active:scale-95 sm:px-8 sm:text-base"
+            className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-[var(--button-text)] shadow-[var(--glow)] transition hover:bg-[var(--accent-strong)] active:scale-95 sm:px-8 sm:text-base"
           >
             See My Work
           </MagneticButton>
@@ -249,7 +249,7 @@ export function Hero() {
           {/* Secondary CTA */}
           <MagneticButton
             href="#contact"
-            className="inline-flex items-center justify-center rounded-full border border-[var(--color-border)] px-6 py-3 text-sm font-semibold text-white transition hover:border-[var(--accent)] active:scale-95 sm:px-8 sm:text-base"
+            className="inline-flex items-center justify-center rounded-full border border-[var(--color-border)] px-6 py-3 text-sm font-semibold text-[var(--foreground)] transition hover:border-[var(--accent)] active:scale-95 sm:px-8 sm:text-base"
           >
             Work With Me
           </MagneticButton>
@@ -267,7 +267,7 @@ export function Hero() {
           perspectiveOrigin: "50% 50%"
         }}
       >
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[rgba(14,110,85,0.25)]/50 via-[rgba(51,255,180,0.1)]/30 to-transparent blur-3xl" />
+        <div className="absolute inset-0 -z-10 blur-3xl" style={{ background: 'var(--hero-glow-gradient)' }} />
 
         {/* Enhanced Card Frame with depth and 3D tilt */}
         <motion.div
@@ -372,7 +372,8 @@ export function Hero() {
               />
               {/* Enhanced glow overlay with pulsing effect */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-[rgba(51,255,180,0.2)] via-[rgba(51,255,180,0.1)] to-transparent pointer-events-none"
+                className="absolute inset-0 pointer-events-none"
+                style={{ background: 'linear-gradient(to bottom right, rgba(var(--color-accent-rgb), 0.2), rgba(var(--color-accent-rgb), 0.1), transparent)' }}
                 animate={{
                   opacity: isHovered ? [0.8, 1, 0.8] : 0,
                 }}

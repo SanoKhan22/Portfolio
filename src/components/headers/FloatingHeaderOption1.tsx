@@ -110,7 +110,7 @@ export default function FloatingHeaderOption1() {
               {/* Logo with Animated Name */}
               <motion.button
                 onClick={() => scrollToSection("home")}
-                className="text-2xl font-bold font-display relative whitespace-nowrap text-white"
+                className="text-2xl font-bold font-display relative whitespace-nowrap text-[var(--foreground)]"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -180,8 +180,8 @@ export default function FloatingHeaderOption1() {
                       onClick={() => scrollToSection(link.id)}
                       className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all ${
                         isActive
-                          ? "text-white"
-                          : "text-[var(--color-muted)] hover:text-white"
+                          ? "text-[var(--foreground)]"
+                          : "text-[var(--color-muted)] hover:text-[var(--foreground)]"
                       }`}
                       whileHover={{ y: -2 }}
                       whileTap={{ scale: 0.95 }}
