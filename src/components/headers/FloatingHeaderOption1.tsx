@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useSpring } from "framer-motion";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import ThemeToggle from "@/components/ThemeToggle";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -16,6 +17,8 @@ const navLinks = [
 
 export default function FloatingHeaderOption1() {
   const { isScrolled } = useScrollPosition();
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [showFullName, setShowFullName] = useState(true);
@@ -112,37 +115,51 @@ export default function FloatingHeaderOption1() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {/* Ehsanullah - Particle Dispersion Effect */}
-                <span className="relative inline-block mr-2">
-                  {"Ehsanullah".split("").map((char, index) => (
-                    <motion.span
-                      key={index}
-                      className="inline-block"
-                      animate={{
-                        opacity: showFullName ? 1 : 0,
-                        x: showFullName ? 0 : (index % 2 === 0 ? -50 : 50),
-                        y: showFullName ? 0 : (Math.random() - 0.5) * 100,
-                        scale: showFullName ? 1 : 0,
-                        rotate: showFullName ? 0 : (Math.random() - 0.5) * 360,
-                      }}
-                      transition={{
-                        duration: 0.6,
-                        delay: index * 0.03,
-                        ease: "easeInOut",
-                      }}
-                    >
-                      {char}
-                    </motion.span>
-                  ))}
-                </span>
+                {/* Conditional Animation: Particle effect on desktop, simple fade on mobile */}
+                {!isMobile && !prefersReducedMotion && showFullName ? (
+                  // Desktop: Full particle dispersion effect
+                  <span className="relative inline-block mr-2">
+                    {"Ehsanullah".split("").map((char, index) => (
+                      <motion.span
+                        key={index}
+                        className="inline-block"
+                        animate={{
+                          opacity: showFullName ? 1 : 0,
+                          x: showFullName ? 0 : (index % 2 === 0 ? -50 : 50),
+                          y: showFullName ? 0 : (Math.random() - 0.5) * 100,
+                          scale: showFullName ? 1 : 0,
+                          rotate: showFullName ? 0 : (Math.random() - 0.5) * 360,
+                        }}
+                        transition={{
+                          duration: 0.6,
+                          delay: index * 0.03,
+                          ease: "easeInOut",
+                        }}
+                      >
+                        {char}
+                      </motion.span>
+                    ))}
+                  </span>
+                ) : showFullName ? (
+                  // Mobile/Reduced Motion: Simple fade
+                  <motion.span
+                    className="inline-block mr-2"
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    Ehsanullah
+                  </motion.span>
+                ) : null}
+                
                 <motion.span
                   className="inline-block"
                   animate={{
-                    x: showFullName ? 0 : -148,
+                    x: showFullName ? 0 : (isMobile || prefersReducedMotion ? -130 : -148),
                   }}
                   transition={{
-                    duration: 0.5,
-                    delay: 0.3,
+                    duration: isMobile || prefersReducedMotion ? 0.3 : 0.5,
+                    delay: isMobile || prefersReducedMotion ? 0 : 0.3,
                     ease: "easeInOut",
                   }}
                 >

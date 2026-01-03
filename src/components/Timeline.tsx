@@ -79,7 +79,7 @@ function TimelineItem({
       viewport={{ once: true, margin: "-50px" }}
       onViewportEnter={() => setIsInView(true)}
       transition={{ delay: index * 0.05, duration: 0.6 }}
-      className="group relative flex min-w-[280px] flex-col md:min-w-[320px]"
+      className="group relative flex min-w-[280px] flex-col md:min-w-[320px] flex-shrink-0 snap-center"
     >
       {/* Timeline Node with Badge Icon or Emoji */}
       <div className="relative mb-4 flex items-center">
@@ -379,22 +379,25 @@ export function Timeline() {
           <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-[var(--background)] to-transparent" />
           <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-[var(--background)] to-transparent" />
 
-          {/* Scrollable container */}
+          {/* Scrollable container with scroll snap for better mobile UX */}
           <div 
             ref={scrollContainerRef}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseLeave}
-            className="overflow-x-auto overflow-y-hidden pb-8 scrollbar-hide cursor-grab active:cursor-grabbing"
-            style={{ scrollBehavior: isDragging ? 'auto' : 'smooth' }}
+            className="overflow-x-auto overflow-y-hidden pb-8 scrollbar-hide cursor-grab active:cursor-grabbing snap-x snap-mandatory"
+            style={{ 
+              scrollBehavior: isDragging ? 'auto' : 'smooth',
+              WebkitOverflowScrolling: 'touch'
+            }}
           >
             {isLoading ? (
               <div className="flex gap-6 px-4 md:gap-8 md:px-8">
                 {[...Array(5)].map((_, i) => (
                   <div 
                     key={i}
-                    className="min-w-[280px] md:min-w-[320px] animate-pulse"
+                    className="min-w-[280px] md:min-w-[320px] flex-shrink-0 snap-center animate-pulse"
                   >
                     <div className="mb-4 h-12 w-12 rounded-full bg-[var(--surface)]" />
                     <div className="h-48 rounded-xl bg-[var(--surface)]/50" />

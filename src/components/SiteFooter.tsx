@@ -109,14 +109,14 @@ export function SiteFooter() {
                 <span className="text-green-400">Available for work</span>
               </div>
               <div className="flex items-center gap-2 pt-2 mt-2 border-t border-[var(--color-border)]/30">
-                <GraduationCap className="h-4 w-4 text-[var(--accent)]" />
-                <span className="text-white/60">
+                <GraduationCap className="h-4 w-4 text-[var(--accent)] flex-shrink-0" />
+                <span className="text-white/60 text-xs">
                   Computer Science Student @{" "}
                   <a
                     href="https://www.elte.hu/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[var(--accent)] hover:text-[var(--accent-strong)] transition-colors underline decoration-[var(--accent)]/30 hover:decoration-[var(--accent-strong)]"
+                    className="text-[var(--accent)] hover:text-[var(--accent-strong)] transition-colors underline decoration-[var(--accent)]/30 hover:decoration-[var(--accent-strong)] whitespace-nowrap"
                   >
                     ELTE University, Hungary
                   </a>
@@ -151,7 +151,7 @@ export function SiteFooter() {
                   href={link.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="group flex h-8 w-8 items-center justify-center rounded-lg border border-[var(--color-border)] bg-[var(--surface-raised)] text-[var(--color-muted)] transition-all hover:border-[var(--accent)] hover:bg-[var(--accent)]/10 hover:text-white hover:scale-110"
+                  className="group flex h-9 w-9 md:h-8 md:w-8 items-center justify-center rounded-lg border border-[var(--color-border)] bg-[var(--surface-raised)] text-[var(--color-muted)] transition-all hover:border-[var(--accent)] hover:bg-[var(--accent)]/10 hover:text-white hover:scale-110"
                   aria-label={link.label}
                 >
                   {link.label === "LinkedIn" && (

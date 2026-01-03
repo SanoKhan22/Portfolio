@@ -7,10 +7,11 @@ import { motion, useReducedMotion, useMotionValue, useSpring, useTransform, useS
 import { BlobMorph } from "@/components/animations/BlobMorph";
 import { CodeRunner } from "@/components/animations/CodeRunner";
 import { useGitHubTimeline } from "@/hooks/useGitHub";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { Rocket, Layers, Code2 } from "lucide-react";
 
-// More pixels for smoother animation, fewer on mobile
-const getPixelCount = (isMobile: boolean) => (isMobile ? 20 : 28);
+// Optimize pixel animations: disable on mobile for better performance
+const getPixelCount = (isMobile: boolean) => (isMobile ? 0 : 28);
 
 const createHeroPixels = (count: number) =>
   Array.from({ length: count }, (_, index) => ({
@@ -66,6 +67,7 @@ function MagneticButton({ children, href, className, ...props }: { children: Rea
 
 export function Hero() {
   const prefersReducedMotion = useReducedMotion();
+  const isMobileQuery = useMediaQuery("(max-width: 768px)");
   const [isMobile, setIsMobile] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -73,10 +75,10 @@ export function Hero() {
   const { scrollY } = useScroll();
   const { timelineRepos } = useGitHubTimeline();
 
-  // Enhanced multi-layer parallax with smoother motion
-  const yBackground = useTransform(scrollY, [0, 600], [0, 180]);
-  const yPortrait = useTransform(scrollY, [0, 500], [0, 100]);
-  const yBadges = useTransform(scrollY, [0, 400], [0, 40]);
+  // Simplified parallax on mobile for better performance
+  const yBackground = useTransform(scrollY, [0, 600], isMobile ? [0, 0] : [0, 180]);
+  const yPortrait = useTransform(scrollY, [0, 500], isMobile ? [0, 0] : [0, 100]);
+  const yBadges = useTransform(scrollY, [0, 400], isMobile ? [0, 0] : [0, 40]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0.6]);
   const scale = useTransform(scrollY, [0, 300], [1, 0.95]);
 
@@ -140,7 +142,7 @@ export function Hero() {
     const checkMobile = () => {
       const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
-      // Generate pixels on client-side only to avoid hydration mismatch
+      // Generate pixels on client-side only, 0 on mobile for better performance
       setHeroPixels(createHeroPixels(getPixelCount(mobile)));
     };
     checkMobile();

@@ -66,7 +66,7 @@ export function ContactCta() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className="mt-6 font-display text-4xl font-bold text-white md:text-5xl lg:text-6xl"
+          className="mt-6 font-display text-3xl font-bold text-white sm:text-4xl md:text-5xl lg:text-6xl break-words"
         >
           Let&apos;s build something{" "}
           <span className="bg-gradient-to-r from-[var(--accent)] to-[var(--accent-strong)] bg-clip-text text-transparent">
@@ -107,7 +107,7 @@ export function ContactCta() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.6 }}
-          className="mt-8 flex flex-col gap-4 sm:flex-row md:mt-10"
+          className="mt-8 flex flex-col gap-5 sm:flex-row sm:gap-4 md:mt-10"
         >
           {/* Primary CTA */}
           <Link
