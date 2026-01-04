@@ -65,48 +65,53 @@ body.theme-transitioning main > section:nth-child(8) * { transition-delay: 1.2s 
 body.theme-transitioning footer,
 body.theme-transitioning footer * { transition-delay: 1.35s !important; }
 
-/* Light Theme - Soft, warm, easy on the eyes */
+/* Light Theme - Soft, low-contrast, easy on the eyes (UX optimized) */
 :root.light {
   color-scheme: light;
   
-  /* Base Colors - Warm paper-like tone, not pure white */
-  --background: #f0f2f1;
-  --foreground: #2d3a34;
-  --muted: #5a6860;
-  --secondary: #6b7a73;
+  /* Base Colors - Muted, warm neutrals inspired by material design */
+  --background: #e8eae9;
+  --foreground: #3a4540;
+  --muted: #6b7973;
+  --secondary: #7d8b84;
   
-  /* Surface Layers - Cream/sage tint */
-  --surface: #f7f9f8;
-  --surface-raised: #eaedeb;
+  /* Surface Layers - Subtle elevation hierarchy */
+  --surface: #eff1f0;
+  --surface-raised: #f5f7f6;
   
-  /* Accent Colors - Slightly muted for light bg */
-  --accent: #0c5e4a;
-  --accent-strong: #084536;
+  /* Accent Colors - Desaturated for reduced contrast */
+  --accent: #2d7961;
+  --accent-strong: #1f5a47;
   
-  /* Borders - Subtle, warm gray-green */
-  --border: #cdd5d0;
+  /* Borders - Very subtle, low contrast */
+  --border: #d4dad7;
   
-  /* Shadows & Effects - Very subtle */
-  --glow: 0 20px 60px rgba(14, 110, 85, 0.06);
+  /* Shadows & Effects - Soft, diffused depth */
+  --glow: 0 8px 32px rgba(45, 121, 97, 0.08);
   
   /* RGB values */
-  --color-accent-rgb: 12, 94, 74;
+  --color-accent-rgb: 45, 121, 97;
   
-  /* Gradients - Warm, subtle, no harsh whites */
-  --background-gradient: radial-gradient(circle at top, #e8ebe9 0%, #f0f2f1 55%, #f0f2f1 100%);
-  --hero-glow-gradient: linear-gradient(to bottom, rgba(12, 94, 74, 0.04) 0%, rgba(51, 255, 180, 0.015) 50%, transparent 100%);
+  /* Gradients - Soft ambient lighting effect */
+  --background-gradient: radial-gradient(ellipse at top, #dfe3e0 0%, #e8eae9 40%, #e8eae9 100%);
+  --hero-glow-gradient: linear-gradient(to bottom, rgba(45, 121, 97, 0.03) 0%, rgba(45, 121, 97, 0.01) 60%, transparent 100%);
   
-  /* Component-specific */
-  --toggle-bg: rgba(90, 104, 96, 0.1);
-  --toggle-bg-hover: rgba(90, 104, 96, 0.15);
+  /* Component-specific with subtle overlays */
+  --toggle-bg: rgba(107, 121, 115, 0.08);
+  --toggle-bg-hover: rgba(107, 121, 115, 0.14);
   --button-text: #ffffff;
   
-  /* GitHub Contribution Colors (Light Theme) */
-  --contrib-none: #d4d9d5;
-  --contrib-level-1: #85e89d;
-  --contrib-level-2: #34d399;
-  --contrib-level-3: #10b981;
-  --contrib-level-4: #059669;
+  /* Section overlays for depth and hierarchy */
+  --section-overlay: rgba(255, 255, 255, 0.4);
+  --section-overlay-alt: rgba(45, 121, 97, 0.02);
+  --card-overlay: rgba(255, 255, 255, 0.6);
+  
+  /* GitHub Contribution Colors (Light Theme) - desaturated */
+  --contrib-none: #dde2df;
+  --contrib-level-1: #9dd4ac;
+  --contrib-level-2: #5cb87a;
+  --contrib-level-3: #3a9b63;
+  --contrib-level-4: #2d7961;
 }
 
 @theme inline {
